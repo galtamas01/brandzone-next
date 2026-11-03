@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A blog (blog/, blog-ro/) még nincs átköltöztetve az új oldalra, ezért az
+  URL-jei kimaradtak. Ha a blog átkerül, a cikkek URL-jeit ide vissza kell tenni.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://brandzone.ro/</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/"/>
+  </url>
+  <url>
+    <loc>https://brandzone.ro/hu</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/"/>
+  </url>
+  <url>
+    <loc>https://brandzone.ro/en</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/"/>
+  </url>
+  <url><loc>https://brandzone.ro/policy/politica-de-confidentialitate</loc></url>
+  <url><loc>https://brandzone.ro/policy/adatvedelmi-tajekoztato</loc></url>
+  <url><loc>https://brandzone.ro/policy/privacy-policy</loc></url>
+</urlset>

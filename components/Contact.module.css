@@ -1,0 +1,278 @@
+.section {
+  padding-block: calc(var(--section-y) * 0.5) var(--section-y);
+}
+
+.card {
+  display: grid;
+  gap: 48px;
+  padding: clamp(24px, 5vw, 72px);
+  border-radius: 32px;
+  background: radial-gradient(600px circle at 0% 0%, rgb(40 153 69 / 0.12), transparent 60%), var(--bg-2);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-60);
+}
+
+.label span:first-child {
+  color: var(--fg);
+}
+
+.rule {
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6.4vw, 5.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 26rem;
+  margin-top: 20px;
+  font-size: clamp(16px, 1.3vw, 18px);
+  color: var(--fg-60);
+}
+
+.channels {
+  display: grid;
+  gap: 28px;
+  margin: 40px 0 0;
+}
+
+.channels dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-60);
+}
+
+.channels dt svg {
+  color: var(--green);
+}
+
+.channels dd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 500;
+}
+
+.channels dd a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 300ms var(--ease-out);
+}
+
+.tag {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-60);
+}
+
+/* ---------- Űrlap ---------- */
+.form {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.row {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-80);
+}
+
+.req {
+  margin-left: 2px;
+  color: var(--green);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.03);
+  color: var(--fg);
+  line-height: 1.4;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--fg-40);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  background: rgb(255 255 255 / 0.05);
+  box-shadow: 0 0 0 4px rgb(40 153 69 / 0.2);
+}
+
+/* Csak beküldési kísérlet után / elhagyott mezőnél jelzünk hibát, nem gépelés közben. */
+.field input:user-invalid,
+.field textarea:user-invalid {
+  border-color: #e5484d;
+}
+
+.consent {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg-60);
+  cursor: pointer;
+}
+
+.consent input {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  opacity: 0;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 7px;
+  color: #fff;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.box svg {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.consent input:checked + .box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.consent input:checked + .box svg {
+  opacity: 1;
+  transform: none;
+}
+
+.consent input:focus-visible + .box {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.consent a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--fg-40);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--fg-40);
+}
+
+.note span {
+  color: var(--green);
+}
+
+.submit {
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 6px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .channels dd a:hover {
+    background-size: 100% 1px;
+  }
+
+  .field input:hover:not(:focus),
+  .field textarea:hover:not(:focus) {
+    border-color: var(--fg-40);
+  }
+}
+
+/* Két mező egy sorban csak ott, ahol az űrlap elég széles (a kártya egy- vagy kéthasábos). */
+@media (min-width: 640px) and (max-width: 1023px), (min-width: 1240px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(48px, 6vw, 96px);
+  }
+}

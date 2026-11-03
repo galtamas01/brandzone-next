@@ -1,0 +1,497 @@
+{
+  "shared": {
+    "counters": [
+      {
+        "id": "videos",
+        "count": 2000,
+        "display": "2000",
+        "icon": "counter/camera.png"
+      },
+      {
+        "id": "views",
+        "count": 100000000,
+        "display": "100&nbsp;000&nbsp;000",
+        "icon": "counter/visible.png"
+      },
+      {
+        "id": "followers",
+        "count": 200000,
+        "display": "200&nbsp;000",
+        "icon": "counter/user.png"
+      }
+    ]
+  },
+  "languages": {
+    "hu": {
+      "partners": [
+        {
+          "url": "https://www.tiktok.com/@perfekt_uzletlanc",
+          "img": "partner-logos/perfekt.jpg",
+          "alt": "Perfekt logo"
+        },
+        {
+          "img": "partner-logos/1776179258793_1776179254351_540873869_758503246931678_6565289129599768331_n_2.jpg",
+          "url": "https://www.tiktok.com/@melindainstal_hu",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@revolut",
+          "img": "partner-logos/revolut.jpg",
+          "alt": "Revolut logo"
+        },
+        {
+          "img": "partner-logos/1776242550497_1776242444791_logo2.jpg",
+          "url": "https://www.instagram.com/poetbypetry/",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242549068_1776242471512_dacia.jpg",
+          "url": "https://www.tiktok.com/@ilovedacia",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1785513735074_1785513631860_Chery_logo.png",
+          "url": "https://www.tiktok.com/@chery_autotorino",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@ludicus_games",
+          "img": "partner-logos/ludicus.jpg",
+          "alt": "Ludicus Games logo"
+        },
+        {
+          "img": "partner-logos/1776242551313_1776242524911_Scut.jpg",
+          "url": "https://www.facebook.com/scutmetalic",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@kidlet.ro_erdely_",
+          "img": "partner-logos/kidlet.jpg",
+          "alt": "Kidlet logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@herboxa",
+          "img": "partner-logos/herboxa.jpg",
+          "alt": "Herboxa logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@mierttiktok",
+          "img": "partner-logos/miert.png",
+          "alt": "MIERT logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@diverzum.ro",
+          "img": "partner-logos/diverzum.jpg",
+          "alt": "Diverzum logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@sik.group",
+          "img": "partner-logos/sik_group.jpg",
+          "alt": "SIK Group logo"
+        },
+        {
+          "img": "partner-logos/1787922044345_1787922024030_romstal.jpg",
+          "url": "https://www.tiktok.com/@romstal.transilvania",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.facebook.com/vitalityklinika",
+          "img": "partner-logos/vitality.jpg",
+          "alt": "Vitality Klinika logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@visitparajd",
+          "img": "partner-logos/visit_parajd.jpg",
+          "alt": "Visit Parajd logo"
+        }
+      ],
+      "counterTexts": {
+        "videos": "Videó",
+        "views": "Nézettség",
+        "followers": "Követő"
+      },
+      "videos": [
+        {
+          "videoId": "4a85b30a-ece3-474b-91c8-86d641141ac5",
+          "title": "CHERY HARGHITA",
+          "logo": "./partner-logos/1785513735074_1785513631860_Chery_logo.png"
+        },
+        {
+          "videoId": "6b002b31-0000-49b7-b4fe-1e48afba8569",
+          "title": "ZÖLD LIGET LAKÓPARK",
+          "logo": "partner-logos/1791487105574_A_ZO_LD_LIGET_SIKEREI.prproj.jpg"
+        },
+        {
+          "videoId": "c14db54e-6e64-4b70-86cd-32f1970de974",
+          "title": "PERFEKT",
+          "logo": "partner-logos/perfekt.jpg"
+        },
+        {
+          "videoId": "81c5b089-337b-4638-a72c-0486963c5e4b",
+          "title": "MELINDA INSTAL",
+          "logo": "partner-logos/1776244050743_540873869_758503246931678_6565289129599768331_n_2.jpg"
+        },
+        {
+          "videoId": "f3d3833c-1c1a-44f3-97e5-7fbfb70628f3",
+          "title": "RIVERSIDE",
+          "logo": "./partner-logos/riverside.jpg"
+        },
+        {
+          "videoId": "6d2c7035-4e56-45c8-8c00-49ecae2eca0a",
+          "title": "TAPERKI",
+          "logo": "./partner-logos/taperki.jpg"
+        },
+        {
+          "videoId": "8dc68a7c-7944-4c78-83f6-5599f908ce1e",
+          "title": "SIK GROUP",
+          "logo": "./partner-logos/sik_group.jpg"
+        },
+        {
+          "videoId": "f76f1aed-9891-4015-842e-427c507f7570",
+          "title": "VITALITY KLINIKA",
+          "logo": "./partner-logos/vitality.jpg"
+        }
+      ],
+      "faq": [
+        {
+          "question": "Hogyan zajlik veletek a közös munka?",
+          "answer": "A közös munka egy átgondolt, átlátható folyamat mentén halad:<ul><li>Megismerjük a cégedet, céljaidat és a piacodat</li><li>Kidolgozzuk a videós stratégiát és tartalmi irányokat</li><li>Igény esetén a megfelelő szereplőt biztosítunk</li><li>Megírjuk a forgatókönyveket</li><li>Leforgatjuk és megvágjuk a videókat</li><li>Segítünk a publikálásban és az optimalizálásban</li></ul>Mindent kézben tartunk, hogy neked minél kevesebb időt kelljen ezzel töltened."
+        },
+        {
+          "question": "Nem vagyunk kamera előtt rutinosak. Tudtok ebben segíteni?",
+          "answer": "Igen. A legtöbb ügyfelünk nem profi kamera előtt, és ez teljesen rendben van. Segítünk a felkészülésben, egyszerű, természetes szövegekkel dolgozunk, a forgatás közben pedig végig instruálunk. A cél nem a „színészkedés”, hanem az, hogy hitelesen és magabiztosan jelenjetek meg."
+        },
+        {
+          "question": "Nem szeretnénk videóban szerepelni. Tudtok ebben segíteni?",
+          "answer": "Természetesen. Sok projektünkben nem a cég tulajdonosa vagy munkatársai szerepelnek. Dolgozunk színészekkel, narrációval, POV-videókkal, termék- és élethelyzet-alapú tartalmakkal is. A videók így is személyesek és működőképesek maradnak."
+        },
+        {
+          "question": "Tudtok több nyelvű tartalmat is készíteni?",
+          "answer": "Igen. Rendszeresen készítünk magyar, román és angol nyelvű tartalmakat, akár ugyanarra a videóra több nyelvi verzióban is. A szövegezést és a stílust mindig az adott piacra optimalizáljuk."
+        },
+        {
+          "question": "Milyen költségekkel kell számolni?",
+          "answer": "A költségek a tartalom mennyiségétől, típusától és a projekt összetettségétől függenek. Jellemzően havi csomagokban dolgozunk, így kiszámítható és tervezhető a videógyártás. Minden esetben egyedi ajánlatot készítünk az igényekhez igazítva."
+        },
+        {
+          "question": "Csak short-form videókat készítetek, vagy mással is foglalkoztok?",
+          "answer": "A fő fókuszunk a short-form videók (TikTok, Instagram Reels, YouTube Shorts), de ezen túl foglalkozunk brand-videókkal, reklám anyagokkal, mood-videókkal és kampány tartalmakkal is. A videókat mindig üzleti cél mentén tervezzük, nem önmagukért."
+        }
+      ]
+    },
+    "ro": {
+      "partners": [
+        {
+          "url": "https://www.tiktok.com/@perfekt_uzletlanc",
+          "img": "partner-logos/perfekt.jpg",
+          "alt": "Perfekt logo"
+        },
+        {
+          "img": "partner-logos/1785513849884_1785513842553_Chery_logo.png",
+          "url": "https://www.facebook.com/cheryharghita",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1787922046754_1787922011179_romstal.jpg",
+          "url": "https://www.tiktok.com/@romstal.transilvania",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@revolut",
+          "img": "partner-logos/revolut.jpg",
+          "alt": "Revolut logo"
+        },
+        {
+          "img": "partner-logos/1776242426457_1776242355116_dacia.jpg",
+          "url": "https://www.tiktok.com/@ilovedacia",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776179201270_1776179194945_540873869_758503246931678_6565289129599768331_n_2.jpg",
+          "url": "https://www.tiktok.com/@melindainstal_ro",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242132289_1776242084235_Scut.jpg",
+          "url": "https://www.facebook.com/scutmetalic",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242427171_1776242392598_logo2.jpg",
+          "url": "https://www.instagram.com/poetbypetry/",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@herboxa",
+          "img": "partner-logos/herboxa.jpg",
+          "alt": "Herboxa logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@diverzum.ro",
+          "img": "partner-logos/diverzum.jpg",
+          "alt": "Diverzum logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@ludicus_games",
+          "img": "partner-logos/ludicus.jpg",
+          "alt": "Ludicus Games logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@mierttiktok",
+          "img": "partner-logos/miert.png",
+          "alt": "MIERT logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@utilajetransilvane_ro",
+          "img": "partner-logos/sik_group.jpg",
+          "alt": "SIK Group logo"
+        },
+        {
+          "url": "https://www.facebook.com/vitalityklinika",
+          "img": "partner-logos/vitality.jpg",
+          "alt": "Vitality Klinika logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@kidlet.ro_erdely_",
+          "img": "partner-logos/kidlet.jpg",
+          "alt": "Kidlet logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@visitparajd",
+          "img": "partner-logos/visit_parajd.jpg",
+          "alt": "Visit Praid logo"
+        }
+      ],
+      "counterTexts": {
+        "videos": "Videoclipuri",
+        "views": "Vizualizări",
+        "followers": "Urmăritori"
+      },
+      "videos": [
+        {
+          "videoId": "63497867-54dd-4e76-820c-f3ec26ef4c73",
+          "title": "ROMSTAL",
+          "logo": "partner-logos/1787925730669_romstal.jpg"
+        },
+        {
+          "videoId": "bf365b64-a774-4a64-8624-6e55ba9f1075",
+          "title": "DACIA",
+          "logo": "partner-logos/1776243623257_dacia.jpg"
+        },
+        {
+          "videoId": "cce3b29e-6328-4747-b84c-119051b39c9d",
+          "title": "PETRY ESTATE WINERY",
+          "logo": "partner-logos/1776243625196_logo2.jpg"
+        },
+        {
+          "videoId": "8f609e15-6edc-4c0a-b4cb-12714d529fce",
+          "title": "REVOLUT",
+          "logo": "partner-logos/1792530124778_revolut.jpg"
+        },
+        {
+          "videoId": "2bd0c22d-2ef8-4da1-a0a7-6edc69daa297",
+          "title": "FRUTTAMAX",
+          "logo": "partner-logos/fruttamax.jpg"
+        },
+        {
+          "videoId": "24e8d114-4635-4f1a-9d87-8631945cd4fd",
+          "title": "MELINDA INSTAL",
+          "logo": "partner-logos/1776179648288_540873869_758503246931678_6565289129599768331_n_2.jpg"
+        },
+        {
+          "videoId": "73fba227-9b65-4d82-9ae1-2243e346ffb0",
+          "title": "SIK GROUP",
+          "logo": "./partner-logos/sik_group.jpg"
+        },
+        {
+          "videoId": "9c1bf81e-2477-44b2-bc7e-1e5ca53d1602",
+          "title": "DIVERZUM",
+          "logo": "./partner-logos/diverzum.jpg"
+        }
+      ],
+      "faq": [
+        {
+          "question": "Cum decurge colaborarea cu noi?",
+          "answer": "Colaborarea se desfășoară pe baza unui proces bine structurat și transparent:<ul><li>Ne familiarizăm cu compania ta, obiectivele și piața în care activezi</li><li>Dezvoltăm strategia video și direcțiile de conținut</li><li>La nevoie, asigurăm actorii sau persoanele potrivite pentru filmări</li><li>Scriem scenariile</li><li>Filmăm și edităm materialele video</li><li>Oferim suport pentru publicare și optimizare</li></ul><br>Ne ocupăm de întregul proces, astfel încât tu să investești cât mai puțin timp în acest lucru."
+        },
+        {
+          "question": "Nu suntem obișnuiți în fața camerei. Ne puteți ajuta?",
+          "answer": "Da. Majoritatea clienților noștri nu sunt profesioniști în fața camerei, iar acest lucru este perfect normal. Te ajutăm cu pregătirea, folosim texte simple și naturale, iar în timpul filmării oferim îndrumare pas cu pas. Scopul nu este „jocul actoricesc”, ci o apariție autentică și încrezătoare."
+        },
+        {
+          "question": "Nu dorim să apărem în videoclipuri. Ne puteți ajuta?",
+          "answer": "Desigur. În multe proiecte, în videoclipuri nu apar proprietarii sau angajații companiei. Lucrăm cu actori, voice-over, videoclipuri de tip POV, conținut axat pe produs sau pe situații reale. Astfel, materialele rămân personale și eficiente."
+        },
+        {
+          "question": "Puteți realiza conținut în mai multe limbi?",
+          "answer": "Da. Realizăm frecvent conținut în limbile maghiară, română și engleză, inclusiv mai multe versiuni lingvistice pentru același video. Textele și stilul sunt adaptate întotdeauna pieței țintă."
+        },
+        {
+          "question": "La ce costuri ar trebui să ne așteptăm?",
+          "answer": "Costurile depind de volumul de conținut, tipul materialelor și complexitatea proiectului. De regulă, lucrăm pe bază de pachete lunare, ceea ce face producția video predictibilă și ușor de planificat. Pentru fiecare colaborare oferim o ofertă personalizată, adaptată nevoilor tale."
+        },
+        {
+          "question": "Realizați doar videoclipuri short-form sau și alte tipuri de conținut?",
+          "answer": "Focusul nostru principal este pe videoclipurile short-form (TikTok, Instagram Reels, YouTube Shorts), însă realizăm și brand video-uri, materiale publicitare, mood video-uri și conținut pentru campanii. Toate materialele sunt concepute în jurul unor obiective de business clare, nu doar pentru vizibilitate."
+        }
+      ]
+    },
+    "en": {
+      "partners": [
+        {
+          "url": "https://www.tiktok.com/@perfekt_uzletlanc",
+          "img": "partner-logos/perfekt.jpg",
+          "alt": "Perfekt logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@ludicus_games",
+          "img": "partner-logos/ludicus.jpg",
+          "alt": "Ludicus Games logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@revolut",
+          "img": "partner-logos/revolut.jpg",
+          "alt": "Revolut logo"
+        },
+        {
+          "img": "partner-logos/1776242697125_1776242588024_dacia.jpg",
+          "url": "https://www.tiktok.com/@ilovedacia",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1785514162014_1785514158997_Chery_logo.png",
+          "url": "https://www.facebook.com/cheryharghita",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242698355_1776242606295_logo2.jpg",
+          "url": "https://www.instagram.com/poetbypetry/",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242699087_1776242673177_540873869_758503246931678_6565289129599768331_n_2.jpg",
+          "url": "https://www.tiktok.com/@melindainstal_ro",
+          "alt": "Partner"
+        },
+        {
+          "img": "partner-logos/1776242699837_1776242573956_Scut.jpg",
+          "url": "https://www.facebook.com/scutmetalic",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@kidlet.ro_erdely_",
+          "img": "partner-logos/kidlet.jpg",
+          "alt": "Kidlet logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@ikamper.hu",
+          "img": "partner-logos/ikamper.jpg",
+          "alt": "IKamper logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@herboxa",
+          "img": "partner-logos/herboxa.jpg",
+          "alt": "Herboxa logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@mierttiktok",
+          "img": "partner-logos/miert.png",
+          "alt": "MIERT logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@diverzum.ro",
+          "img": "partner-logos/diverzum.jpg",
+          "alt": "Diverzum logo"
+        },
+        {
+          "img": "partner-logos/1787922047891_1787922039930_romstal.jpg",
+          "url": "https://www.tiktok.com/@romstal.transilvania",
+          "alt": "Partner"
+        },
+        {
+          "url": "https://www.tiktok.com/@utilajetransilvane_ro",
+          "img": "partner-logos/sik_group.jpg",
+          "alt": "SIK Group logo"
+        },
+        {
+          "url": "https://www.tiktok.com/@visitparajd",
+          "img": "partner-logos/visit_parajd.jpg",
+          "alt": "Visit Praid logo"
+        }
+      ],
+      "counterTexts": {
+        "videos": "Videos",
+        "views": "Views",
+        "followers": "Followers"
+      },
+      "videos": [
+        {
+          "videoId": "3b698539-897c-4c46-862d-1ddc8c06c5c2",
+          "title": "EURO GAS SYSTEM",
+          "logo": "partner-logos/1791533670458_EURO_GAS_SYSTEM.jpg"
+        },
+        {
+          "videoId": "8f609e15-6edc-4c0a-b4cb-12714d529fce",
+          "title": "REVOLUT",
+          "logo": "partner-logos/1792529985491_REVOLUT.jpg"
+        },
+        {
+          "videoId": "bf365b64-a774-4a64-8624-6e55ba9f1075",
+          "title": "DACIA",
+          "logo": "partner-logos/1776243917652_dacia.jpg"
+        },
+        {
+          "videoId": "cce3b29e-6328-4747-b84c-119051b39c9d",
+          "title": "PETRY ESTATE WINERY",
+          "logo": "partner-logos/1776243918620_logo2.jpg"
+        },
+        {
+          "videoId": "9c1bf81e-2477-44b2-bc7e-1e5ca53d1602",
+          "title": "DIVERZUM",
+          "logo": "./partner-logos/diverzum.jpg"
+        },
+        {
+          "videoId": "2bd0c22d-2ef8-4da1-a0a7-6edc69daa297",
+          "title": "FRUTTAMAX",
+          "logo": "partner-logos/fruttamax.jpg"
+        },
+        {
+          "videoId": "24e8d114-4635-4f1a-9d87-8631945cd4fd",
+          "title": "MELINDA INSTAL",
+          "logo": "partner-logos/1776243921182_540873869_758503246931678_6565289129599768331_n_2.jpg"
+        },
+        {
+          "videoId": "73fba227-9b65-4d82-9ae1-2243e346ffb0",
+          "title": "SIK GROUP",
+          "logo": "partner-logos/1776243922085_sik_logo.jpg"
+        }
+      ],
+      "faq": [
+        {
+          "question": "How does working with you look like?",
+          "answer": "Our collaboration follows a well-structured and transparent process:<ul><li>We get to know your company, goals, and market</li><li>We develop the video strategy and content directions</li><li>If needed, we provide suitable actors or on-screen talent</li><li>We write the scripts</li><li>We handle filming and editing</li><li>We assist with publishing and optimization</li></ul><br>We manage the entire process so you can spend as little time on it as possible."
+        },
+        {
+          "question": "We’re not comfortable in front of the camera. Can you help with that?",
+          "answer": "Yes. Most of our clients are not used to being on camera, and that’s completely fine. We help with preparation, use simple and natural scripts, and guide you throughout the shoot. The goal isn’t acting—it’s appearing authentic and confident."
+        },
+        {
+          "question": "We don’t want to appear in the videos. Can you help?",
+          "answer": "Absolutely. In many projects, the company owners or team members do not appear on camera. We work with actors, voice-over, POV-style videos, product-focused and scenario-based content. The videos remain personal and effective without requiring your presence."
+        },
+        {
+          "question": "Can you create content in multiple languages?",
+          "answer": "Yes. We regularly produce content in Hungarian, Romanian, and English, including multiple language versions of the same video. The tone and messaging are always adapted to the target market."
+        },
+        {
+          "question": "What costs should we expect?",
+          "answer": "Costs depend on the volume of content, the type of videos, and the complexity of the project. We typically work with monthly packages, making video production predictable and easy to plan. Every collaboration comes with a custom-tailored offer based on your needs."
+        },
+        {
+          "question": "Do you only create short-form videos, or do you do more than that?",
+          "answer": "Our main focus is short-form video (TikTok, Instagram Reels, YouTube Shorts), but we also produce brand videos, advertising materials, mood videos, and campaign content. Every video is created with clear business objectives in mind—not just for visibility."
+        }
+      ]
+    }
+  }
+}

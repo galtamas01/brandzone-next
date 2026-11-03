@@ -1,0 +1,56 @@
+/* Minden méret em-ben: a kapcsoló a betűmérettel együtt skálázódik. */
+.switch {
+  --w: 1.34em;
+  --h: 0.72em;
+  --b: 0.085em;
+  --gap: 0.075em;
+  --knob: calc(var(--h) - 2 * var(--b) - 2 * var(--gap));
+  --travel: calc(var(--w) - 2 * var(--b) - 2 * var(--gap) - var(--knob));
+
+  position: relative;
+  display: inline-block;
+  width: var(--w);
+  height: var(--h);
+  margin-inline: 0.03em 0.04em;
+  border: var(--b) solid currentColor;
+  border-radius: 999px;
+  vertical-align: 0;
+  cursor: pointer;
+  transition:
+    background-color 320ms ease,
+    border-color 320ms ease;
+}
+
+.knob {
+  position: absolute;
+  top: var(--gap);
+  left: var(--gap);
+  width: var(--knob);
+  height: var(--knob);
+  border-radius: 50%;
+  background: currentColor;
+  transition:
+    transform 520ms var(--ease-spring),
+    background-color 320ms ease;
+}
+
+.switch[data-on] {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.switch[data-on] .knob {
+  transform: translateX(var(--travel));
+  background-color: #fff;
+}
+
+.switch:active .knob {
+  transition-duration: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .knob {
+    transition-duration: 1ms;
+  }
+}

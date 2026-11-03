@@ -1,0 +1,128 @@
+.btn {
+  --h: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 8px 8px 22px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: var(--h);
+  white-space: nowrap;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.light {
+  background: var(--fg);
+  color: var(--ink);
+}
+
+.green {
+  background: var(--green);
+  color: #fff;
+}
+
+.sm {
+  font-size: 14px;
+  gap: 10px;
+  padding: 6px 6px 6px 16px;
+}
+
+.lg {
+  font-size: 16px;
+  padding: 10px 10px 10px 26px;
+}
+
+.label {
+  display: block;
+  height: var(--h);
+  overflow: hidden;
+}
+
+.roll {
+  display: flex;
+  flex-direction: column;
+  transition: transform 500ms var(--ease-out);
+}
+
+.roll > span {
+  display: block;
+  height: var(--h);
+}
+
+.chip {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+}
+
+.sm .chip {
+  width: 28px;
+  height: 28px;
+}
+
+.lg .chip {
+  width: 40px;
+  height: 40px;
+}
+
+.green .chip {
+  background: #fff;
+  color: var(--green);
+}
+
+.chip svg {
+  transition: transform 500ms var(--ease-out);
+}
+
+.chip .down {
+  transform: rotate(90deg);
+}
+
+.btn:focus-visible .roll {
+  transform: translateY(-50%);
+}
+
+.btn:focus-visible .chip svg:not(.down) {
+  transform: rotate(-45deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .light:hover {
+    background: #fff;
+  }
+
+  .green:hover {
+    background: var(--green-hover);
+  }
+
+  .btn:hover .roll {
+    transform: translateY(-50%);
+  }
+
+  .btn:hover .chip svg:not(.down) {
+    transform: rotate(-45deg);
+  }
+
+  .btn:hover .chip .down {
+    transform: rotate(90deg) translateX(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll,
+  .chip svg {
+    transition: none;
+  }
+}

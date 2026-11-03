@@ -1,0 +1,140 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.grid {
+  display: grid;
+  gap: 8px;
+}
+
+.list {
+  border-top: 1px solid var(--line);
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+  /* Natív magasság-animáció a <details> tartalmára (Chromium 131+); máshol azonnal nyílik. */
+  interpolate-size: allow-keywords;
+}
+
+.item::details-content {
+  height: 0;
+  overflow: clip;
+  opacity: 0;
+  transition:
+    height 300ms var(--ease-out),
+    opacity 300ms ease,
+    content-visibility 300ms allow-discrete;
+}
+
+.item[open]::details-content {
+  height: auto;
+  opacity: 1;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  list-style: none;
+  cursor: pointer;
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color 200ms ease;
+}
+
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.question:focus-visible {
+  outline-offset: 6px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  transition:
+    transform 300ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.item[open] .icon {
+  transform: rotate(45deg);
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.answer {
+  max-width: 44rem;
+  padding: 0 56px 28px 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--fg-60);
+}
+
+.answer :global(ul) {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0;
+  padding-left: 0;
+}
+
+.answer :global(li) {
+  position: relative;
+  padding-left: 22px;
+}
+
+.answer :global(li)::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.72em;
+  width: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--green);
+}
+
+.answer :global(strong),
+.answer :global(b) {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .question:hover .icon {
+    border-color: var(--fg-40);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+  }
+
+  .head {
+    position: sticky;
+    top: calc(var(--nav-h) + 48px);
+    align-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item::details-content,
+  .icon {
+    transition-duration: 1ms;
+  }
+}

@@ -1,0 +1,120 @@
+.footer {
+  padding: clamp(56px, 8vw, 112px) 0 max(28px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+/* Szóvédjegy a lábléc teljes szélességében, az O helyén a kapcsoló. */
+.wordmark {
+  font-family: var(--font-display);
+  /* a BRANDZONE kb. 9.3em széles: a konténer szélességéhez méretezve */
+  font-size: min(12vw, 11rem);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.socials {
+  display: flex;
+  gap: 8px;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--fg-80);
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.socials a:active {
+  transform: scale(0.94);
+}
+
+.address {
+  font-style: normal;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 500;
+}
+
+.langs {
+  display: flex;
+  gap: 4px;
+}
+
+.langs a {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 36px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-60);
+  transition: color 200ms ease;
+}
+
+.langs a[aria-current] {
+  color: var(--fg);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 28px;
+  padding-top: 24px;
+  font-size: 13px;
+  color: var(--fg-60);
+}
+
+.legal strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.legal a {
+  transition: color 200ms ease;
+}
+
+.top {
+  margin-left: auto;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .socials a:hover {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--ink);
+  }
+
+  .langs a:hover,
+  .legal a:hover {
+    color: var(--fg);
+  }
+}
+
+@media (max-width: 640px) {
+  .top {
+    margin-left: 0;
+  }
+}
