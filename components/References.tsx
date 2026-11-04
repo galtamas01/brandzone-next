@@ -12,12 +12,12 @@ export function References({ dict, videos, counters }: Props) {
   return (
     <section id="referenciak" className={styles.section} aria-labelledby="references-title">
       <div className="container">
-        <SectionHead index="02" label={dict.references.label} title={dict.references.title} id="references-title" />
+        <SectionHead label={dict.references.label} title={dict.references.title} id="references-title" />
         <Stats counters={counters} labels={dict.references.counters} />
       </div>
 
       <Rail
-        label={dict.references.title}
+        label={dict.references.title.replace(/\u00ad/g, "")}
         prevLabel={dict.references.prev}
         nextLabel={dict.references.next}
         singleVideo

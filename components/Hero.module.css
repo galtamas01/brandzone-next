@@ -12,58 +12,87 @@
   overflow: hidden;
   border-radius: 28px;
   background: var(--bg);
+  transition: background-color 500ms ease;
 }
 
-/* ---------- 0. poszterfal ---------- */
-.wall {
+/* ---------- 0. szintvonalak ---------- */
+/* A burkolónak van tartaléka a széleken, így a lebegés közben sosem látszik a kép széle. */
+.lines {
   position: absolute;
-  inset: -30% -18%;
+  inset: -3%;
   z-index: -3;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
-  transform: rotate(-9deg);
-  filter: grayscale(1) brightness(0.42) contrast(1.05);
+  opacity: 0.7;
+  transition: opacity 600ms ease;
+  animation: drift 36s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* A két kép (alap + festés) pontosan fedi egymást, ezért ugyanúgy méretezett. */
+.lines picture {
+  display: contents;
 }
 
-.col:nth-child(even) {
-  margin-top: -18%;
-}
-
-.col img {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  border-radius: 18px;
-}
-
-/* ---------- 1. videó ---------- */
-.video {
+.lines img {
   position: absolute;
   inset: 0;
-  z-index: -2;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 42%;
+}
+
+/*
+ * Mobilon (és tableten) a kép fix szélességű, nem a kerethez igazodik (cover). Álló, keskeny keretben a cover a
+ * magasság szerint méretez, és a vonalak apró, sűrű szövevénnyé zsugorodnak; a desktop nagyítása (kb. 1500 px)
+ * viszont csak 2-3 vonalat enged látni. A 750 px a kettő közti, kipróbált középút: a vonalak jól olvashatóak,
+ * és a képből több vonal is belefér. A kép 1024x1983, ezért a magasság a szélességből jön; a függőleges
+ * fókusz (42%) ugyanaz, mint desktopon, vízszintesen középre igazodik.
+ */
+@media (max-width: 899px) {
+  .lines img {
+    --lines-w: 750px;
+    inset: auto;
+    left: 50%;
+    top: 42%;
+    width: var(--lines-w);
+    height: calc(var(--lines-w) * 1983 / 1024);
+    max-width: none;
+    transform: translate(-50%, -42%);
+  }
+}
+
+/* A zöld festés és a visszakapcsoláskori felvillanás a két képen van, ezek külön kezelhetők. */
+.paint {
+  transition: opacity 500ms ease;
+}
+
+.flash {
   opacity: 0;
-  transform: scale(1.05);
-  transition:
-    opacity 1.8s var(--ease-out),
-    transform 1.8s var(--ease-out);
+  pointer-events: none;
 }
 
-.video[data-ready] {
-  opacity: 1;
-  transform: none;
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
-/* ---------- 2. scrim ---------- */
+@keyframes drift {
+  from {
+    transform: translate3d(-0.8%, 0.6%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0.8%, -0.6%, 0) scale(1.03);
+  }
+}
+
+/* ---------- 1. scrim ---------- */
 .scrim {
   position: absolute;
   inset: 0;
@@ -101,14 +130,6 @@
   color: var(--fg-80);
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgb(40 153 69 / 0.22);
-}
-
 .title {
   display: flex;
   flex-direction: column;
@@ -120,6 +141,103 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
   text-shadow: 0 16px 38px rgb(0 0 0 / 0.32);
+}
+
+/* ---------- BRANDS ON. ↔ BRANDS OFF. ---------- */
+/* A cím vége („N." / „FF.") és a lead szövege két egymásra tett változat, a section[data-power] váltja. */
+.words {
+  display: inline-grid;
+}
+
+.wordOn,
+.wordOff {
+  grid-area: 1 / 1;
+  transition:
+    transform 450ms var(--ease-out),
+    opacity 300ms ease;
+}
+
+.wordOff {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.leads {
+  display: grid;
+}
+
+.leads > .lead {
+  grid-area: 1 / 1;
+  transition:
+    opacity 400ms ease,
+    transform 450ms var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.leadOff {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition-delay: 0s, 0s, 400ms;
+}
+
+/* KI állás: teljesen fekete, a menüsor (SiteHeader) és a sütisáv is eltűnik, csak a cím és a lead marad. */
+.hero {
+  transition: background-color 500ms ease;
+}
+
+.hero[data-power="off"] {
+  background: #000;
+}
+
+.hero[data-power="off"] .frame {
+  background: #000;
+}
+
+.hero[data-power="off"] .lines {
+  opacity: 0;
+}
+
+.hero[data-power="off"] .scrim,
+.hero[data-power="off"] .eyebrow,
+.hero[data-power="off"] .actions {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 400ms ease,
+    visibility 0s linear 400ms;
+}
+
+.hero[data-power="off"] .paint {
+  opacity: 0;
+}
+
+.hero[data-power="off"] .wordOn {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.hero[data-power="off"] .wordOff {
+  transform: none;
+  opacity: 1;
+}
+
+.hero[data-power="off"] .leadOn {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition-delay: 0s, 0s, 400ms;
+}
+
+.hero[data-power="off"] .leadOff {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.hero[data-flash] .flash {
+  animation: flash 1100ms ease-out both;
 }
 
 /* Maszkolt sor-felemelkedés */
@@ -216,18 +334,9 @@
     border-radius: 22px;
   }
 
-  .wall {
-    grid-template-columns: repeat(3, 1fr);
-    inset: -20% -30%;
-  }
-
-  .col:nth-child(n + 4) {
-    display: none;
-  }
-
   .actions > a:first-child {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
@@ -264,8 +373,15 @@
     animation: none;
   }
 
-  .video {
-    transition: none;
-    transform: none;
+  .lines {
+    animation: none;
+  }
+
+  .wordOn,
+  .wordOff,
+  .leads > .lead,
+  .lines,
+  .paint {
+    transition-duration: 1ms;
   }
 }

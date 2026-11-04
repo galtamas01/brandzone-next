@@ -23,17 +23,6 @@
   color: var(--fg-60);
 }
 
-.label span:first-child {
-  color: var(--fg);
-}
-
-.rule {
-  width: 32px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-
 .title {
   font-family: var(--font-display);
   font-weight: 400;

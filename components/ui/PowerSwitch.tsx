@@ -9,6 +9,14 @@ type Props = {
   /** Csak akkor kapcsoljon be, amikor láthatóvá válik (pl. a láblécben). */
   onWhenVisible?: boolean;
   className?: string;
+  /**
+   * Vezérelt mód (a hero használja): a szülő adja az állapotot és kezeli a kapcsolást.
+   * Ilyenkor valódi `role="switch"` elem, billentyűzettel (Enter/Szóköz) is használható.
+   */
+  on?: boolean;
+  onToggle?: () => void;
+  /** Hozzáférhető név a vezérelt módhoz. */
+  label?: string;
 };
 
 /**
@@ -18,12 +26,20 @@ type Props = {
  * Egérrel kattintva ki-be kapcsolható (apró „easter egg"), billentyűzetről nem érhető el,
  * mert nincs funkciója.
  */
-export function PowerSwitch({ autoOnAfter = 1150, onWhenVisible = false, className = "" }: Props) {
+export function PowerSwitch({
+  autoOnAfter = 1150,
+  onWhenVisible = false,
+  className = "",
+  on: controlledOn,
+  onToggle,
+  label,
+}: Props) {
+  const controlled = onToggle !== undefined;
   const [on, setOn] = useState(autoOnAfter === null);
   const [node, setNode] = useState<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    if (autoOnAfter === null || !node) return;
+    if (controlled || autoOnAfter === null || !node) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let timer: number | undefined;
@@ -50,7 +66,29 @@ export function PowerSwitch({ autoOnAfter = 1150, onWhenVisible = false, classNa
       io.disconnect();
       window.clearTimeout(timer);
     };
-  }, [autoOnAfter, onWhenVisible, node]);
+  }, [controlled, autoOnAfter, onWhenVisible, node]);
+
+  if (controlled) {
+    return (
+      <span
+        role="switch"
+        aria-checked={!!controlledOn}
+        aria-label={label}
+        tabIndex={0}
+        className={`${styles.switch} ${styles.interactive} ${className}`}
+        data-on={controlledOn || undefined}
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onToggle?.();
+          }
+        }}
+      >
+        <span className={styles.knob} />
+      </span>
+    );
+  }
 
   return (
     <span

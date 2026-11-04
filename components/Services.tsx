@@ -13,7 +13,7 @@ export function Services({ dict }: { dict: Dictionary }) {
   return (
     <section id="szolgaltatasok" className={styles.sheet} aria-labelledby="services-title">
       <div className="container">
-        <SectionHead index="03" label={dict.services.label} title={dict.services.title} id="services-title" tone="light" />
+        <SectionHead label={dict.services.label} title={dict.services.title} id="services-title" tone="light" />
 
         <ol className={styles.stack}>
           {dict.services.items.map((s, i) => (

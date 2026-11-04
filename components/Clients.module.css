@@ -13,10 +13,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--fg-80);
-  transition:
-    transform 160ms var(--ease-out),
-    border-color 200ms ease,
-    color 200ms ease;
+  transition: transform 200ms var(--ease-out);
 }
 
 .toggle:active {
@@ -128,6 +125,15 @@
   }
 }
 
+/* Érintőképernyős eszközön nincs hover, ezért a logók eleve teljes színben látszanak (egérrel továbbra is
+   szürkék, és csak ráhúzásra színesednek). */
+@media (pointer: coarse) {
+  .logo img {
+    filter: none;
+    opacity: 1;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .track {
     animation-play-state: paused;
@@ -138,9 +144,8 @@
     opacity: 1;
   }
 
-  .toggle:hover {
-    border-color: var(--fg-40);
-    color: var(--fg);
+  .toggle:hover:not(:active) {
+    transform: scale(var(--hover-scale));
   }
 }
 

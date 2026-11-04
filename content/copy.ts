@@ -54,6 +54,8 @@ export type Dictionary = {
     cta: string;
     secondary: string; // új
     switchLabel: string; // új
+    offLead: string; // a kapcsoló KI állásában megjelenő szöveg
+    offHint: string;
   };
   clients: { label: string; title: string; showAll: string; showLess: string };
   references: {
@@ -169,10 +171,12 @@ const ro: Dictionary = {
     cta: "Cere ofertă",
     secondary: "Vezi referințele",
     switchLabel: "Comutator BRANDS ON",
+    offLead: "Așa arată un brand fără conținut.",
+    offHint: "Pornește comutatorul la loc.",
   },
   clients: {
     label: "Parteneri",
-    title: "Colaborările noastre",
+    title: "Colabo\u00adrările noastre",
     showAll: "Vezi toate",
     showLess: "Arată mai puțin",
   },
@@ -321,16 +325,18 @@ const hu: Dictionary = {
     cta: "Árajánlatot kérek",
     secondary: "Referenciák",
     switchLabel: "BRANDS ON kapcsoló",
+    offLead: "Így néz ki egy brand tartalom nélkül.",
+    offHint: "Kapcsold vissza a kapcsolót.",
   },
   clients: {
     label: "Partnerek",
-    title: "Együttműködéseink",
+    title: "Együtt\u00adműködéseink",
     showAll: "Mind",
     showLess: "Kevesebb",
   },
   references: {
     label: "Munkáink",
-    title: "Referenciák",
+    title: "Referen\u00adciák",
     counters: { videos: "Videó", views: "Nézettség", followers: "Követő" },
     play: "Videó lejátszása",
     prev: "Előző",
@@ -338,11 +344,11 @@ const hu: Dictionary = {
   },
   services: {
     label: "Amit csinálunk",
-    title: "Szolgáltatások",
+    title: "Szolgál\u00adtatások",
     items: [
       {
         id: "tiktok-reels",
-        title: [{ text: "TikTok, " }, { text: "Reels", accent: true }, { text: " tartalomgyártás" }],
+        title: [{ text: "TikTok, " }, { text: "Reels", accent: true }, { text: " tartalom\u00adgyártás" }],
         body: "A short form tartalom nálunk nem különálló videókat jelent, hanem egy organikusan felépített, hosszú távú márkaépítést. Olyan kommunikációt, amely a vezető márkák szintjén működik, és amelyhez az emberek kapcsolódnak.",
         bullets: [
           { icon: "check", text: "Márkaazonos tartalmak" },
@@ -353,7 +359,7 @@ const hu: Dictionary = {
       },
       {
         id: "commercial",
-        title: [{ text: "Reklámvideó", accent: true }, { text: " készítés" }],
+        title: [{ text: "Reklám\u00advideó", accent: true }, { text: " készítés" }],
         body: "Az ötlettől a forgatáson át a vágásig mindent megoldunk: storyboard, helyszín és stáb, világítás–hang, motion graphics, feliratok. A videókhoz teljes körű hirdetéskezelést is biztosítunk, hogy az elkészült tartalom a megfelelő célközönséghez jusson el.",
         bullets: [
           { icon: "clapper", text: "Erős kreatív koncepció és profi kivitelezés." },
@@ -364,7 +370,7 @@ const hu: Dictionary = {
       },
       {
         id: "ugc",
-        title: [{ text: "UGC", accent: true }, { text: " tartalomgyártás" }],
+        title: [{ text: "UGC", accent: true }, { text: " tartalom\u00adgyártás" }],
         body: "Hatalmas szereplőbázissal dolgozunk, így bármely iparágra és célcsoportra megtaláljuk a márkához passzoló arcot, olyan szereplőt biztosítunk, akivel a közönséged azonosulni tud.",
         bullets: [
           { icon: "people", text: "Hiteles, valós emberek – bizalomépítő tartalom." },
@@ -473,10 +479,12 @@ const en: Dictionary = {
     cta: "Get a quote",
     secondary: "See our work",
     switchLabel: "BRANDS ON switch",
+    offLead: "This is what a brand looks like without content.",
+    offHint: "Flip the switch back on.",
   },
   clients: {
     label: "Partners",
-    title: "Our Collaborations",
+    title: "Our Collabo\u00adrations",
     showAll: "View all",
     showLess: "Show less",
   },

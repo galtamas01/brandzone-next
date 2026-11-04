@@ -1,0 +1,167 @@
+/*
+ * A régi oldal borítógrafikáinak közös osztályai (a blog-style.css-ből átvéve, változatlan értékekkel).
+ * A cover.svg fájlok egy része ezekre épül (sávok, görbe, hullám), más részük a saját <style>-ját hozza.
+ * Globális, mert az SVG-k tartalma nyers HTML-ként érkezik, a CSS-modulok nem érik el.
+ */
+.cover-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1.2;
+}
+
+.cover-bar {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.cover-bar.b1 {
+  animation: barGrow1 6s ease-in-out infinite;
+}
+
+.cover-bar.b2 {
+  animation: barGrow2 6s ease-in-out infinite 0.3s;
+}
+
+.cover-bar.b3 {
+  animation: barGrow3 6s ease-in-out infinite 0.6s;
+}
+
+@keyframes barGrow1 {
+  0%,
+  100% {
+    width: 60px;
+  }
+  50% {
+    width: 92px;
+  }
+}
+
+@keyframes barGrow2 {
+  0%,
+  100% {
+    width: 130px;
+  }
+  50% {
+    width: 176px;
+  }
+}
+
+@keyframes barGrow3 {
+  0%,
+  100% {
+    width: 210px;
+  }
+  50% {
+    width: 248px;
+  }
+}
+
+.cover-curve {
+  fill: none;
+  stroke: white;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: drawCurve 5s ease-in-out infinite;
+}
+
+@keyframes drawCurve {
+  0% {
+    stroke-dashoffset: 620;
+  }
+  45%,
+  75% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 620;
+  }
+}
+
+.cover-dot {
+  fill: white;
+  animation: dotPulse 5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  55%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.cover-wave-a,
+.cover-wave-b {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.cover-wave-a {
+  stroke: rgba(255, 255, 255, 0.9);
+  animation: waveShift 7s ease-in-out infinite;
+}
+
+.cover-wave-b {
+  stroke: rgba(255, 255, 255, 0.35);
+  animation: waveShift 7s ease-in-out infinite reverse;
+}
+
+@keyframes waveShift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-26px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-bar.b1,
+  .cover-bar.b2,
+  .cover-bar.b3,
+  .cover-curve,
+  .cover-dot,
+  .cover-wave-a,
+  .cover-wave-b {
+    animation: none;
+  }
+
+  .cover-curve {
+    stroke-dashoffset: 0;
+  }
+
+  .cover-dot {
+    opacity: 1;
+  }
+}
+
+/*
+ * Hover-rajzolás: minden vonalas alakzat mögé készül egy zöld másolat (lásd Cover.tsx), amely alapból
+ * "ki van rajzolva nulláig". A kártya hoverja a stroke-dashoffset-et nullára viszi (PostCard.module.css).
+ * !important kell, mert a cover.svg saját <style>-ja és animációi ugyanezekre a tulajdonságokra is hatnak.
+ */
+.bz-trace {
+  fill: none !important;
+  stroke: var(--green-hover, #2fb052) !important;
+  stroke-linecap: butt !important;
+  stroke-dasharray: 1 1 !important;
+  stroke-dashoffset: 1 !important;
+  vector-effect: none !important;
+  pointer-events: none;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bz-trace {
+    transition-duration: 1ms;
+  }
+}

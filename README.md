@@ -24,7 +24,7 @@ Node 20+ kell (a Netlify a `netlify.toml` szerint Node 22-vel buildel).
 3. **Forms:** Netlify → *Site configuration → Forms* → *Enable form detection*.
    Az űrlapnevek (`form-ro`, `form-hu`, `form-en`) és a mezők ugyanazok, mint a régi oldalon,
    így az e-mail-értesítéseket ugyanúgy kell beállítani.
-4. Domain átállítása csak akkor, ha a blog is átkerült (ld. lent).
+4. A blog (`/blog/`, `/blog-ro/`) a régi URL-eken itt van, így a domain átállítható (ld. „Blog" lent).
 
 ## Mappaszerkezet
 
@@ -36,16 +36,21 @@ app/
   globals.css                tokenek (színek, betűk, easing), alapstílusok, segédosztályok
 components/                  minden szekció egy komponens + saját .module.css
   ui/                        újrahasznosított elemek: RollButton, SectionHead, PowerSwitch, Rail
+  blog/                      a blog komponensei (címlap, cikkoldal, kártya, borító, folyamatvonal)
 content/
   copy.ts                    AZ ÖSSZES SZÖVEG nyelvenként (menü, hero, szolgáltatások, űrlap…)
   data.json                  partnerek, referenciavideók, GYIK, számlálók (Controller-kompatibilis)
   data.ts                    a data.json beolvasása, útvonalak egységesítése
   team.ts                    csapattagok
   policy/<nyelv>.html        adatvédelmi tájékoztatók szövege
+  blog/<hu|ro>/<slug>/       a blogcikkek: meta.json + body.html (a mappa neve a slug)
+  blog-copy.ts               a blog felületi szövegei (szűrő, gombok, alapértelmezett CTA)
 lib/
   site.ts                    domain, médiahosting, hero-videó, mérőkódok
   i18n.ts                    nyelvek, URL-ek, űrlapnevek
   metadata.ts                title, description, canonical, hreflang, OG, JSON-LD
+  blog.ts / blog-shared.ts   a cikkek beolvasása és ellenőrzése (build közben) / közös típusok, URL-ek
+scripts/postbuild.mjs        build után: blog címlapok a /blog/ címre, blog URL-ek a sitemapbe
 public/                      képek, logók, poszterek, robots.txt, sitemap.xml, llms.txt
 docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozgás)
 ```
@@ -58,6 +63,7 @@ docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozg
 | Új partner / referenciavideó / GYIK | `content/data.json` (ugyanaz a szerkezet, mint a régi repóban) |
 | Partnerlogó | `public/partner-logos/` + útvonal a `data.json`-ban |
 | Referenciavideó posztere | `public/video-posters/<videoId>.jpg` (576×1024) |
+| Új blogcikk | új mappa a `content/blog/hu/` vagy `ro/` alatt (ld. „Blog" lent), mást nem kell szerkeszteni |
 | Új csapattag | kép `public/img/team/` alá (640×768 webp) + sor a `content/team.ts`-be |
 | Videó-hosting vagy hero-videó cseréje | `lib/site.ts` (`MEDIA_BASE`, `HERO_VIDEO`) |
 | Mérőkód (GA, GTM, Meta, TikTok, OpenAI) | `lib/site.ts` → `TRACKING` |
@@ -80,11 +86,33 @@ A `content/data.json` szerkezete **szándékosan azonos** a régi repó `data.js
 erre a repóra vált, a célútvonalat kell átírni benne `content/data.json`-ra és
 `public/partner-logos/`, `public/video-posters/`-re. Minden commit után a Netlify újrabuildel.
 
+## Blog
+
+A cikkek a `content/blog/<hu|ro>/<slug>/` mappákban vannak, a mappa neve a slug (az URL).
+Mappánként két fájl kell:
+
+- `meta.json`: `title`, `description`, `ogDescription`, `eyebrow` (a téma, ez adja a szűrőgombokat),
+  `datePublished` (ÉÉÉÉ-HH-NN), `readingTime`, `excerpt`, `highlights` (3 db `{value,label}`),
+  `faq` (`{q,a}` lista), `ctaTitle`, `ctaText`; opcionális: `order` (azonos napon belüli sorrend, kisebb = feljebb).
+- `cover.svg` (opcionális): a cikk egyedi borítógrafikája (400×225 vagy hasonló viewBox, `preserveAspectRatio="xMidYMid slice"`). Ha nincs, a slugból generált szintvonal-borító kerül a helyére. Hoverra a borító minden vonalán (`path`, `line`, `circle`, `rect` stb.) végigfut egy zöld vonal; ehhez a `cover.svg`-ben nem kell semmit csinálni, a `Cover.tsx` automatikusan zöld másolatot készít a vonalas alakzatokról.
+- `body.html`: csak a cikk törzse (`<p class="art-lead">`, `<h2>`, `<h3>`, `<ul>`, `<ol>`, `<div class="art-note">`).
+  A cím, a kiemelések, a GYIK és a CTA a `meta.json`-ból épül.
+
+Ami maguktól megvan: a címlap kártyája és témaszűrője, a legfrissebb cikk nagy kártyája, a tartalomjegyzék
+(a `<h2>`-kből), a borító (a `cover.svg`, ennek hiányában generált), a kapcsolódó cikkek, a JSON-LD, a canonical
+és a sitemap-bejegyzés. A `npm run build` minden hibát egyszerre kiír (hiányzó mező, törött belső
+`/blog/…` link), ezért rossz slug nem kerülhet élesbe.
+
+- **Címlap-URL:** a canonical a régi, záró perjeles alak (`/blog/`, `/blog-ro/`). A Next `blog.html`-t ír,
+  a `scripts/postbuild.mjs` ezt `blog/index.html`-be teszi, így a Netlify pont úgy szolgálja ki, mint
+  a régi oldalon. A cikkek perjel nélküliek (`/blog/<slug>`).
+- **Nyelvek:** a magyar és a román cikkek önálló tartalmak. A nyelvváltó a blogban a másik nyelv
+  blogcímlapjára, az EN a főoldalra visz.
+- **Videók:** a régi cikkek Bunny.net iframe-jeit kivettük (az előfizetés lejárt). Ha új tárhely lesz,
+  a `body.html`-be kell visszatenni a videót.
+
 ## Tudnivalók, nyitott pontok
 
-- **Blog:** most nincs benne. A régi blog-URL-ek (`/blog/…`, `/blog-ro/…`) az új oldalon 404-et
-  adnának, ezért a brandzone.ro domaint csak a blog átköltöztetése után érdemes átállítani,
-  vagy addig átirányítást kell tenni a régi deployra. A `sitemap.xml`-ből a blog kimaradt.
 - **GDPR:** a GA, a GTM, a Meta és az OpenAI pixel a régi oldalhoz hasonlóan hozzájárulás nélkül
   is betölt, csak a TikTok pixel vár elfogadásra. Javasolt mindet a süti-hozzájáruláshoz kötni
   (Google Consent Mode v2). Az OpenAI pixel `debug: true` módban fut, ezt élesítés előtt érdemes kikapcsolni.

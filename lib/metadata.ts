@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { getDictionary } from "@/content/copy";
 import { alternatesFor, ROUTES, type Locale } from "@/lib/i18n";
 import { GOOGLE_SITE_VERIFICATION, SITE_URL } from "@/lib/site";
+import { BLOG_COPY } from "@/content/blog-copy";
+import { indexPath, postPath, type BlogLang, type Post } from "@/lib/blog";
 
 const OG_LOCALE: Record<Locale, string> = { ro: "ro_RO", hu: "hu_HU", en: "en_US" };
 
@@ -77,6 +79,44 @@ export function organizationJsonLd(locale: Locale) {
       contactType: "sales",
       areaServed: "RO",
       availableLanguage: ["Romanian", "Hungarian", "English"],
+    },
+  };
+}
+
+/** A blog címlapja. Canonical: a régi, záró perjeles alak (/blog/), így a Google-ben nem változik az URL. */
+export function blogIndexMetadata(lang: BlogLang): Metadata {
+  const copy = BLOG_COPY[lang];
+  return {
+    ...base,
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    alternates: { canonical: indexPath(lang) },
+    openGraph: {
+      type: "website",
+      url: indexPath(lang),
+      title: "BrandZone Blog",
+      description: copy.ogDescription,
+      locale: OG_LOCALE[lang],
+      images: [{ url: "/brandzone-logo.jpg" }],
+    },
+  };
+}
+
+/** Egy cikk metaadatai. A cikk URL-je záró perjel nélküli (ahogy a régi oldalon és a sitemapben). */
+export function postMetadata(post: Post): Metadata {
+  return {
+    ...base,
+    title: `${post.title} | BrandZone`,
+    description: post.description,
+    alternates: { canonical: postPath(post.lang, post.slug) },
+    openGraph: {
+      type: "article",
+      url: postPath(post.lang, post.slug),
+      title: post.title,
+      description: post.ogDescription,
+      locale: OG_LOCALE[post.lang],
+      publishedTime: post.datePublished,
+      images: [{ url: "/brandzone-logo.jpg" }],
     },
   };
 }

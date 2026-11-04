@@ -11,7 +11,7 @@ export function Team({ dict }: { dict: Dictionary }) {
       <div className="container">
         <div className={styles.intro}>
           <div className={styles.copy}>
-            <SectionHead index="04" label={dict.team.label} title={dict.team.title} id="team-title" />
+            <SectionHead label={dict.team.label} title={dict.team.title} id="team-title" />
             <div className={styles.paragraphs}>
               {dict.team.paragraphs.map((p, i) => (
                 <p key={i} data-reveal style={{ "--i": i } as React.CSSProperties}>

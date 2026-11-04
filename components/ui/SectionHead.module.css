@@ -19,18 +19,6 @@
   color: var(--fg-60);
 }
 
-.index {
-  font-variant-numeric: tabular-nums;
-  color: var(--fg);
-}
-
-.rule {
-  width: 32px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-
 .title {
   font-family: var(--font-display);
   font-weight: 400;
@@ -39,6 +27,14 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* Keskeny telefonon a hosszú magyar/román szavak (Együttműködéseink, Szolgáltatások) ne lógjanak ki */
+@media (max-width: 400px) {
+  .title {
+    font-size: 2.125rem;
+  }
 }
 
 .aside {
@@ -47,10 +43,6 @@
 
 .light .label {
   color: var(--ink-70);
-}
-
-.light .index {
-  color: var(--ink);
 }
 
 .light .title {

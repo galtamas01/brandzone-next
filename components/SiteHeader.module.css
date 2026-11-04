@@ -1,3 +1,13 @@
+/* A hero „BRANDS OFF." állásában a menüsor is eltűnik (ld. HeroShell). */
+:global(html[data-hero-off]) .header {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 400ms ease,
+    visibility 0s linear 400ms;
+}
+
 .header {
   position: fixed;
   inset: 0 0 auto 0;
@@ -86,6 +96,15 @@
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 300ms var(--ease-out);
+}
+
+/* Az aktuális szekció (pl. Blog) kiemelve marad. */
+.link[aria-current="page"] {
+  color: var(--fg);
+}
+
+.link[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 .right {
@@ -210,7 +229,7 @@
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
   font-family: var(--font-display);
-  font-size: clamp(28px, 8.5vw, 44px);
+  font-size: clamp(24px, 8vw, 44px);
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-transform: uppercase;

@@ -1,0 +1,41 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+}
+
+.wrap picture {
+  display: contents;
+}
+
+.wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+}
+
+/*
+ * Telefonon/tableten ugyanaz a nagyítás és elhelyezés, mint a főoldali hero vonalainál (Hero.module.css):
+ * fix 750 px széles kép (1024x1983 arányban), függőleges fókusz 38%, vízszintesen középen.
+ * A cover egy alacsony, keskeny fejlécben apró, sűrű szövevénnyé zsugorítaná a vonalakat.
+ */
+@media (max-width: 899px) {
+  .wrap img {
+    --lines-w: 750px;
+    inset: auto;
+    left: 50%;
+    top: 38%;
+    width: var(--lines-w);
+    height: calc(var(--lines-w) * 1983 / 1024);
+    max-width: none;
+    transform: translate(-50%, -38%);
+  }
+}

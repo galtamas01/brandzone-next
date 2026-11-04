@@ -3,17 +3,6 @@
   border-top: 1px solid var(--line);
 }
 
-/* Szóvédjegy a lábléc teljes szélességében, az O helyén a kapcsoló. */
-.wordmark {
-  font-family: var(--font-display);
-  /* a BRANDZONE kb. 9.3em széles: a konténer szélességéhez méretezve */
-  font-size: min(12vw, 11rem);
-  line-height: 0.82;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-  margin-bottom: clamp(40px, 6vw, 72px);
-}
-
 .row {
   display: flex;
   align-items: center;

@@ -1,0 +1,147 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 28px;
+}
+
+/* Szűrők csak JS-sel működnek, nélküle rejtve maradnak. */
+.filters {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+:global(html.js) .filters {
+  display: flex;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-80);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--ink);
+}
+
+.n {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.count {
+  min-height: 1.6em;
+  font-size: 13px;
+  color: var(--fg-60);
+}
+
+/* ---------- lista ---------- */
+.lead {
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+  grid-template-columns: 1fr;
+}
+
+.empty {
+  padding: 48px 0;
+  color: var(--fg-60);
+}
+
+/* Szűréskor a lista finoman beúszik (az első betöltéskor nem). */
+.list[data-touched] {
+  animation: rise 380ms var(--ease-out) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover:not([aria-pressed="true"]):not(:active) {
+    border-color: var(--fg-40);
+    color: var(--fg);
+    transform: scale(var(--hover-scale));
+  }
+}
+
+/* Telefonon a szűrősáv egy sorban, vízszintesen húzható (nem tölt el fél képernyőt). */
+@media (max-width: 719px) {
+  .bar {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex: none;
+  }
+
+  .count {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition-duration: 1ms;
+  }
+
+  .list[data-touched] {
+    animation: none;
+  }
+}

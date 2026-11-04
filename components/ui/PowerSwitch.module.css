@@ -44,6 +44,12 @@
   background-color: #fff;
 }
 
+/* Vezérelt (billentyűzettel is elérhető) változat: látható fókuszkarika. */
+.interactive:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 0.02em;
+}
+
 .switch:active .knob {
   transition-duration: 160ms;
 }

@@ -25,7 +25,8 @@
 
 .card {
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, 1fr): a hosszú szavak ne tolják szélesebbre az oszlopot a kártyánál (mobilon kilógott a szöveg) */
+  grid-template-columns: minmax(0, 1fr);
   gap: 28px;
   overflow: hidden;
   padding: clamp(24px, 4vw, 56px);
@@ -55,6 +56,13 @@
   letter-spacing: -0.025em;
   text-transform: uppercase;
   text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-size: 1.75rem;
+  }
 }
 
 .accent {
@@ -136,7 +144,7 @@
   }
 
   .card {
-    grid-template-columns: 7fr 5fr;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     align-items: center;
     gap: 48px;
     min-height: min(640px, calc(100svh - var(--nav-h) - 140px));

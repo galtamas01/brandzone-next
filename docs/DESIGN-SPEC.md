@@ -3,7 +3,7 @@
 ## 0. Brief
 Többoldalas, háromnyelvű (RO alapértelmezett, HU, EN) bemutatkozó oldal a **BrandZone** székelyudvarhelyi videós tartalomgyártó ügynökségnek. A látogató: romániai (erdélyi) cégvezető vagy marketinges, aki short-form videót (TikTok, Reels), reklámfilmet vagy UGC-t keres.
 Hangulat: **magabiztos, filmszerű, letisztult**.
-Aláírás (amire emlékezni fognak): **a kapcsoló.** A logó „ZONE" szavában az O egy félig kitöltött kapcsoló. A hero „BRANDS ON." címében az „ON" O-betűje egy valódi kapcsoló, amely betöltéskor zöldre, BE állásba kattan. A láblécben ugyanez a kapcsoló a BRANDZONE szóvédjegyben ismétlődik.
+Aláírás (amire emlékezni fognak): **a kapcsoló.** A logó „ZONE" szavában az O egy félig kitöltött kapcsoló. A hero „BRANDS ON." címében az „ON" O-betűje egy valódi kapcsoló, amely betöltéskor zöldre, BE állásba kattan. A köszönőoldalon és a 404-en ugyanez a kapcsoló visszatér.
 Hűség: a régi oldal minden tartalmi blokkja megmarad (menü, hero, együttműködések, csapat, referenciák + számlálók, szolgáltatások, GYIK, ajánlatkérő űrlap, lábléc, süti-sáv), új sorrendben és új formában. Új szekció nincs.
 
 ## 1. Stack
@@ -34,7 +34,7 @@ A zöld csak három elemtípuson: a kapcsoló BE állapota, a CTA-k nyíl-chipje
 - **Szemcse:** fix, oldalszintű SVG fractal noise, effektív ~3% (`opacity .35`, rect `.08`), `pointer-events:none`.
 - **Üveg anyag (egyetlen):** `background:rgb(10 10 10/.55); backdrop-filter:blur(16px) saturate(140%); border:1px solid var(--line)`. Menü, nyelvváltó, sütisáv, lejátszógomb.
 - **Gombok:** pirula. Elsődleges: fehér háttér, fekete 14px/500 szöveg, `8px 8px 8px 22px` padding, jobb oldalt 32px zöld chip nyíllal; hoverre a felirat felgördül (500ms), a nyíl −45°-ot fordul; `:active scale(.97)`.
-- **Szekciócímke:** `01 — Referințe` formátum, Poppins 500 12px, uppercase, +.18em, fg-60, előtte 32×1px vonal.
+- **Szekciócímke:** sima szöveg (pl. `Referințe`), Poppins 500 12px, uppercase, +.18em, fg-60; sorszám és kötővonal nélkül.
 - **Belépő reveal:** `[data-reveal]` → `opacity 0, translateY(28px)` → alap, .8s `cubic-bezier(.16,1,.3,1)`, késleltetés `var(--i)*80ms`, 15% láthatóságnál, egyszer. JS nélkül minden látszik (a rejtés csak `html.js` alatt él).
 
 ## 5. Média
@@ -49,7 +49,7 @@ A zöld csak három elemtípuson: a kapcsoló BE állapota, a CTA-k nyíl-chipje
 Takarás a hero-n: függőleges scrim `rgb(10 10 10/.55) 0% → /.08 32% → /.2 58% → /.94 100%`.
 
 ## 6. Szerkezet és sorrend
-Nav (fix) → Hero → 01 Együttműködések (logó-marquee) → 02 Referenciák (számlálók + videósín) → 03 Szolgáltatások (fehér „papír" lap, egymásra csúszó kártyák) → 04 Csapat (szöveg + fotó + portrésín) → 05 GYIK (két hasáb) → 06 Ajánlatkérés (űrlap-kártya) → Lábléc (BRANDZONE szóvédjegy kapcsolóval) → Sütisáv.
+Nav (fix) → Hero → 01 Együttműködések (logó-marquee) → 02 Referenciák (számlálók + videósín) → 03 Szolgáltatások (fehér „papír" lap, egymásra csúszó kártyák) → 04 Csapat (szöveg + fotó + portrésín) → 05 GYIK (két hasáb) → 06 Ajánlatkérés (űrlap-kártya) → Lábléc → Sütisáv.
 A régi horgonyok megmaradnak: `#rolunk`, `#referenciak`, `#szolgaltatasok`, `#faq-title`, `#arajanlat`.
 
 ## 7. Nav
@@ -75,7 +75,7 @@ Mobil: egy hasáb, H1 `clamp(4.25rem,22vw,7rem)`, az al-szöveg és a gombok a c
 - **Csapat:** 5/7 rács: bal címke + H2 + három bekezdés; jobb a csoportkép. Alatta portrésín (4:5, 20px sarok), név 15px Archivo Black, szerep 13px fg-60, LinkedIn ikon, ha van link.
 - **GYIK:** desktopon 5/7, a cím sticky. `details/summary`, 22px kérdés Poppins 500, + ikon 45°-ot fordul, a válasz `interpolate-size` animációval nyílik (ahol nincs támogatás, azonnal).
 - **Ajánlatkérés:** `--bg-2` kártya, 32px sarok, 1px keret, 6/6 rács. Bal: H2, al-szöveg, e-mail- és telefonsorok nyelvcímkével (RO/HU chip a zászló-emoji helyett). Jobb: Netlify-űrlap, 52px-es mezők, 14px sarok, zöld fókuszgyűrű, egyedi jelölőnégyzet, zöld küldés gomb teljes szélességben. A mezőnevek a régiek (name, company, email, phone, note, cb-policy), az űrlapnevek is (form-ro, form-hu, form-en), így a Netlify-beküldések folytonosak.
-- **Lábléc:** BRANDZONE szóvédjegy `18vw` Archivo Black, az O helyén a kapcsoló (BE). Alatta: © sor várossal, közösségi ikonok, e-mail, adatvédelmi link, nyelvlinkek.
+- **Lábléc:** nagy szóvédjegy nélkül, csak: © sor várossal, közösségi ikonok, e-mail, adatvédelmi link, nyelvlinkek.
 - **Sütisáv:** bal alsó üvegkártya, max 440px, két gomb; logika változatlan (`localStorage.cookieConsent`, elfogadásra TikTok pixel).
 
 ## 10. Nem animált
@@ -83,3 +83,12 @@ Háttérrétegek, poszterfal, szemcse, marquee-n kívüli logók; nincs pulzál�
 
 ## 11. Elfogadás (első képernyő)
 Teljes magas, lekerekített keretű hero, a mozgó háttérvideó (vagy szürke poszterfal) felett lent balra hatalmas fehér „BRANDS / ON." felirat, amelyben az O kapcsoló zöldre vált; jobbra lent rövid mondat és fehér „Cere ofertă" gomb zöld nyílchippel; fent lebegő üvegmenü logóval és nyelvváltóval. Mobilon (390px) semmi nem lóg ki, a cím két sorban marad.
+
+## 12. Blog (/blog/, /blog-ro/)
+Ugyanaz a menü, lábléc és sütisáv, mint a főoldalon; a menüben új „Blog" link (HU, RO), a nyelvváltó a másik nyelv blogcímlapjára visz.
+- **Fejléc (címlap és cikk):** a hero szintvonalai (`vonal-base`/`vonal-anim`, csökkentett mozgásnál `vonal-static`) 50%-os átlátszósággal, alul elfúvó maszkkal. Címlap H1: „BLOG", Archivo Black `clamp(5rem,22vw,16rem)`, lead jobbra (≥900px).
+- **Címlap:** témaszűrő pirulák (az `eyebrow` értékekből, darabszámmal; JS nélkül rejtve, minden cikk látszik; telefonon egy sorban húzható), a legfrissebb cikk nagy, kétoszlopos kártyán, a többi 1/2/3 oszlopos rácsban, alul kapcsolatfelvételi kártya.
+- **Kártya:** `--bg-2`, 28px sarok, 16:10 borító. A borító a cikk saját, régi oldalról átvett `cover.svg`-je (változatlanul; ha egy cikknek nincs, a slugból generált fehér szintvonal-minta lép a helyére); hoverra (csak egérrel; billentyűzetes fókuszra is) a borító minden vonalán végigfut egy zöld vonal (a `Cover.tsx` minden vonalas alakzat mögé zöld másolatot tesz, a hover a `stroke-dashoffset`-et viszi nullára, 900ms), a nyíl 4px-et elmozdul. Lenyomáskor `scale(.985)`.
+- **Cikkoldal:** nagy Archivo Black cím, három kiemelés-csempe (zöld érték), a bal oldalon (≥1100px) sticky tartalomjegyzék. A tartalomjegyzék egy függőleges vonal, a szakaszok pontok rajta: olvasás közben a zöld vonal a pontok között haladva festődik végig (a már olvasott pontok zöldek, az aktuális gyűrűs). 1100px alatt a képernyő tetején 3px-es zöld sáv mutatja a haladást. Törzs: 17px/1.75, szélesség 46rem, H2 Poppins 600, listák zöld jelzéssel, `art-note` doboz zöld bal sávval.
+- **Cikk alja:** GYIK (a főoldali `details` stílussal), zöld CTA-gomb kártyán, „Olvass tovább" 3 kapcsolódó cikkel (azonos téma előre).
+

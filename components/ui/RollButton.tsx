@@ -9,14 +9,16 @@ type Props = {
   size?: "sm" | "md" | "lg";
   type?: "submit" | "button";
   className?: string;
-  /** A nyíl iránya: jobbra (alap) vagy lefelé (pl. „Referenciák"). */
+  /** Zöld (vagy fehér) kör nyíllal a gomb végén. Az ajánlatkérő CTA-kon (menü, hero) kikapcsolva. */
+  chip?: boolean;
+  /** A nyíl iránya: jobbra (alap) vagy lefelé. */
   arrow?: "right" | "down";
 };
 
 /**
- * Pirula alakú gomb felgördülő felirattal és forduló nyíl-chippel
- * (MotionSites „text-roll button" recept, Emil-féle tokenekkel).
- * Linkként (href) vagy űrlap-gombként (type) is használható.
+ * Pirula alakú gomb. Hoverre csak kicsit megnő (a `--hover-scale` tokent a globals.css adja),
+ * lenyomáskor összenyomódik. Linkként (href) vagy űrlap-gombként (type) is használható.
+ * A név a korábbi „felgördülő feliratú" változatból maradt, hogy a használata ne változzon.
  */
 export function RollButton({
   href,
@@ -25,20 +27,18 @@ export function RollButton({
   size = "md",
   type = "button",
   className = "",
+  chip = true,
   arrow = "right",
 }: Props) {
-  const cls = `${styles.btn} ${styles[variant]} ${styles[size]} ${className}`;
+  const cls = `${styles.btn} ${styles[variant]} ${styles[size]} ${chip ? "" : styles.plain} ${className}`;
   const inner = (
     <>
-      <span className={styles.label}>
-        <span className={styles.roll}>
-          <span>{children}</span>
-          <span aria-hidden="true">{children}</span>
+      <span className={styles.label}>{children}</span>
+      {chip ? (
+        <span className={styles.chip} aria-hidden="true">
+          <ArrowRight size={16} className={arrow === "down" ? styles.down : undefined} />
         </span>
-      </span>
-      <span className={styles.chip} aria-hidden="true">
-        <ArrowRight size={16} className={arrow === "down" ? styles.down : undefined} />
-      </span>
+      ) : null}
     </>
   );
 

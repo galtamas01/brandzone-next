@@ -21,8 +21,6 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
         <div className={styles.card}>
           <div className={styles.info}>
             <p className={styles.label} data-reveal>
-              <span>06</span>
-              <span className={styles.rule} aria-hidden="true" />
               {c.label}
             </p>
             <h2 id="contact-title" className={styles.title} data-reveal style={{ "--i": 1 } as React.CSSProperties}>

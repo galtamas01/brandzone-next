@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/content/copy";
 import { TRACKING } from "@/lib/site";
 import styles from "./CookieBanner.module.css";
@@ -71,6 +71,7 @@ function loadMarketingPixels() {
 
 export function CookieBanner({ dict, policyHref }: { dict: Dictionary; policyHref: string }) {
   const [visible, setVisible] = useState(false);
+  const decided = useRef(false); // ha a látogató már döntött, a görgetés-figyelő ne hozza vissza a sávot
 
   useEffect(() => {
     const consent = readConsent();
@@ -81,7 +82,9 @@ export function CookieBanner({ dict, policyHref }: { dict: Dictionary; policyHre
     if (consent === null) {
       // Az első benyomás (hero) maradjon tiszta: a sáv az első görgetéskor
       // vagy legkésőbb 6 mp után jelenik meg. A TikTok pixel addig úgysem tölt be.
-      const show = () => setVisible(true);
+      const show = () => {
+        if (!decided.current) setVisible(true);
+      };
       const t = window.setTimeout(show, 6000);
       window.addEventListener("scroll", show, { once: true, passive: true });
       return () => {
@@ -92,6 +95,7 @@ export function CookieBanner({ dict, policyHref }: { dict: Dictionary; policyHre
   }, []);
 
   const decide = (v: Consent) => {
+    decided.current = true;
     saveConsent(v);
     setVisible(false);
     if (v === "accepted") loadMarketingPixels();

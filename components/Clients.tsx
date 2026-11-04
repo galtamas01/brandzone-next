@@ -40,7 +40,6 @@ export function Clients({ dict, partners }: Props) {
     <section className={styles.section} aria-labelledby="clients-title">
       <div className="container">
         <SectionHead
-          index="01"
           label={dict.clients.label}
           title={dict.clients.title}
           id="clients-title"

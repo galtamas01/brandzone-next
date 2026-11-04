@@ -24,7 +24,7 @@ export function Faq({ dict, items }: { dict: Dictionary; items: FaqItem[] }) {
     <section id="faq-title" className={styles.section} aria-labelledby="faq-heading">
       <div className={`container ${styles.grid}`}>
         <div className={styles.head}>
-          <SectionHead index="05" label={dict.faq.label} title={dict.faq.title} id="faq-heading" />
+          <SectionHead label={dict.faq.label} title={dict.faq.title} id="faq-heading" />
         </div>
         <div className={styles.list}>
           {items.map((f, i) => (

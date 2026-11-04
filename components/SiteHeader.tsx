@@ -3,25 +3,42 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/content/copy";
 import { LOCALES, ROUTES, type Locale } from "@/lib/i18n";
+import { BLOG_COPY } from "@/content/blog-copy";
+import { indexPath } from "@/lib/blog-shared";
 import { RollButton } from "@/components/ui/RollButton";
 import styles from "./SiteHeader.module.css";
 
-type Props = { locale: Locale; dict: Dictionary };
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+  /** Aloldalon (pl. blog) a horgonylinkek a főoldalra mutatnak, nem az aktuális oldalra. */
+  subpage?: boolean;
+  /** Az aktuális szekció a menüben (aria-current). */
+  current?: "blog";
+  /** Nyelvváltó célok felülírása (alapból a főoldalak), pl. a blogban a másik nyelv blogcímlapja. */
+  langHrefs?: Partial<Record<Locale, string>>;
+};
 
 const LANG_NAMES: Record<Locale, string> = { ro: "Română", hu: "Magyar", en: "English" };
 
-export function SiteHeader({ locale, dict }: Props) {
+export function SiteHeader({ locale, dict, subpage = false, current, langHrefs }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const links = [
-    { href: "#rolunk", label: dict.nav.about },
-    { href: "#referenciak", label: dict.nav.references },
-    { href: "#szolgaltatasok", label: dict.nav.services },
-    { href: "#faq-title", label: dict.nav.faq },
+  // Aloldalon a főoldal útvonala kerül az horgony elé ("/" + "#rolunk", "/hu" + "#rolunk").
+  const anchor = subpage ? ROUTES[locale].home : "";
+  const links: { href: string; label: string; current?: boolean }[] = [
+    { href: `${anchor}#rolunk`, label: dict.nav.about },
+    { href: `${anchor}#referenciak`, label: dict.nav.references },
+    { href: `${anchor}#szolgaltatasok`, label: dict.nav.services },
+    { href: `${anchor}#faq-title`, label: dict.nav.faq },
   ];
+  // A blog magyarul és románul létezik.
+  if (locale === "hu" || locale === "ro") {
+    links.push({ href: indexPath(locale), label: BLOG_COPY[locale].nav, current: current === "blog" });
+  }
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -62,7 +79,7 @@ export function SiteHeader({ locale, dict }: Props) {
       {LOCALES.map((l) => (
         <a
           key={l}
-          href={ROUTES[l].home}
+          href={langHrefs?.[l] ?? ROUTES[l].home}
           hrefLang={l}
           lang={l}
           className={styles.lang}
@@ -84,7 +101,7 @@ export function SiteHeader({ locale, dict }: Props) {
 
         <nav aria-label="Main" className={`${styles.glass} ${styles.links}`}>
           {links.map((l) => (
-            <a key={l.href} href={l.href} className={styles.link}>
+            <a key={l.href} href={l.href} className={styles.link} aria-current={l.current ? "page" : undefined}>
               {l.label}
             </a>
           ))}
@@ -92,7 +109,7 @@ export function SiteHeader({ locale, dict }: Props) {
 
         <div className={styles.right}>
           <div className={`${styles.glass} ${styles.langWrap}`}>{langSwitch("bar")}</div>
-          <RollButton href="#arajanlat" size="sm" className={styles.cta}>
+          <RollButton href={`${anchor}#arajanlat`} size="sm" chip={false} className={styles.cta}>
             {dict.nav.cta}
           </RollButton>
           <button
@@ -120,14 +137,14 @@ export function SiteHeader({ locale, dict }: Props) {
       >
         <nav aria-label="Mobile" className={styles.menuLinks}>
           {links.map((l, i) => (
-            <a key={l.href} href={l.href} style={{ "--i": i } as React.CSSProperties}>
+            <a key={l.href} href={l.href} style={{ "--i": i } as React.CSSProperties} aria-current={l.current ? "page" : undefined}>
               {l.label}
             </a>
           ))}
         </nav>
         <div className={styles.menuFoot} style={{ "--i": links.length } as React.CSSProperties}>
           {langSwitch("menu")}
-          <RollButton href="#arajanlat" size="lg">
+          <RollButton href={`${anchor}#arajanlat`} size="lg" chip={false}>
             {dict.hero.cta}
           </RollButton>
         </div>

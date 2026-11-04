@@ -1,7 +1,8 @@
 import type { Dictionary } from "@/content/copy";
 import { LOCALES, ROUTES, type Locale } from "@/lib/i18n";
-import { PowerSwitch } from "@/components/ui/PowerSwitch";
 import { SocialIcon } from "@/components/Icons";
+import { BLOG_COPY } from "@/content/blog-copy";
+import { indexPath } from "@/lib/blog-shared";
 import styles from "./SiteFooter.module.css";
 
 const SOCIAL_NAMES = { tiktok: "TikTok", instagram: "Instagram", facebook: "Facebook", youtube: "YouTube" };
@@ -12,15 +13,6 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
   return (
     <footer className={styles.footer}>
       <div className="container">
-        <p className={styles.wordmark}>
-          <span className="sr-only">BRANDZONE</span>
-          <span aria-hidden="true">
-            BRANDZ
-            <PowerSwitch autoOnAfter={250} onWhenVisible />
-            NE
-          </span>
-        </p>
-
         <div className={styles.row}>
           <ul className={styles.socials}>
             {dict.footer.socials.map((s) => (
@@ -49,6 +41,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
           <p>
             <strong>BRANDZONE</strong> © {year} · {dict.footer.location}
           </p>
+          {locale === "hu" || locale === "ro" ? <a href={indexPath(locale)}>{BLOG_COPY[locale].nav}</a> : null}
           <a href={ROUTES[locale].policy}>{dict.footer.policy}</a>
           <a href="#top" className={styles.top}>
             {dict.footer.backToTop} ↑

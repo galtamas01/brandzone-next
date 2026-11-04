@@ -7,6 +7,9 @@
   display: flex;
   gap: clamp(12px, 1.6vw, 20px);
   overflow-x: auto;
+  /* Függőlegesen nem görgethető: így nem „akad bele" a kurzor/ujj, és a lapgörgetés átmegy rajta
+     (a belépő animáció eltolása vagy a hover-nagyítás különben kis függőleges görgethető tartományt csinálna). */
+  overflow-y: hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--peek);
@@ -52,9 +55,7 @@
   border-radius: 999px;
   color: var(--fg);
   transition:
-    transform 160ms var(--ease-out),
-    background-color 200ms ease,
-    border-color 200ms ease,
+    transform 200ms var(--ease-out),
     opacity 200ms ease;
 }
 
@@ -72,9 +73,7 @@
     display: flex;
   }
 
-  .btn:hover:not(:disabled) {
-    background: var(--fg);
-    border-color: var(--fg);
-    color: var(--ink);
+  .btn:hover:not(:disabled):not(:active) {
+    transform: scale(var(--hover-scale));
   }
 }

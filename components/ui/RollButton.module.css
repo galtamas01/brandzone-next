@@ -1,5 +1,4 @@
 .btn {
-  --h: 20px;
   display: inline-flex;
   align-items: center;
   gap: 14px;
@@ -7,11 +6,9 @@
   border-radius: 999px;
   font-weight: 500;
   font-size: 15px;
-  line-height: var(--h);
+  line-height: 20px;
   white-space: nowrap;
-  transition:
-    transform 160ms var(--ease-out),
-    background-color 200ms ease;
+  transition: transform 200ms var(--ease-out);
 }
 
 .btn:active {
@@ -39,21 +36,21 @@
   padding: 10px 10px 10px 26px;
 }
 
+/* Kör nélküli gomb: szimmetrikus belső margó, a magasság a körös változatéval azonos. */
+.plain.sm {
+  padding: 10px 20px;
+}
+
+.plain.md {
+  padding: 15px 26px;
+}
+
+.plain.lg {
+  padding: 18px 32px;
+}
+
 .label {
   display: block;
-  height: var(--h);
-  overflow: hidden;
-}
-
-.roll {
-  display: flex;
-  flex-direction: column;
-  transition: transform 500ms var(--ease-out);
-}
-
-.roll > span {
-  display: block;
-  height: var(--h);
 }
 
 .chip {
@@ -82,47 +79,19 @@
   color: var(--green);
 }
 
-.chip svg {
-  transition: transform 500ms var(--ease-out);
-}
-
 .chip .down {
   transform: rotate(90deg);
 }
 
-.btn:focus-visible .roll {
-  transform: translateY(-50%);
-}
-
-.btn:focus-visible .chip svg:not(.down) {
-  transform: rotate(-45deg);
-}
-
+/* Hover: csak kis nagyítás. A :not(:active) miatt lenyomáskor a lenyomott állapot nyer. */
 @media (hover: hover) and (pointer: fine) {
-  .light:hover {
-    background: #fff;
-  }
-
-  .green:hover {
-    background: var(--green-hover);
-  }
-
-  .btn:hover .roll {
-    transform: translateY(-50%);
-  }
-
-  .btn:hover .chip svg:not(.down) {
-    transform: rotate(-45deg);
-  }
-
-  .btn:hover .chip .down {
-    transform: rotate(90deg) translateX(2px);
+  .btn:hover:not(:active) {
+    transform: scale(var(--hover-scale));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .roll,
-  .chip svg {
+  .btn {
     transition: none;
   }
 }

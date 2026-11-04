@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  A blog (blog/, blog-ro/) még nincs átköltöztetve az új oldalra, ezért az
-  URL-jei kimaradtak. Ha a blog átkerül, a cikkek URL-jeit ide vissza kell tenni.
+  A blog URL-jei a lenti BLOG-URLS jelölő helyére build közben kerülnek (scripts/postbuild.mjs),
+  a content/blog/ mappák alapján. Ezt a fájlt új cikknél nem kell szerkeszteni.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -29,4 +29,5 @@
   <url><loc>https://brandzone.ro/policy/politica-de-confidentialitate</loc></url>
   <url><loc>https://brandzone.ro/policy/adatvedelmi-tajekoztato</loc></url>
   <url><loc>https://brandzone.ro/policy/privacy-policy</loc></url>
+  <!-- BLOG-URLS -->
 </urlset>
