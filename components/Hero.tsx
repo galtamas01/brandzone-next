@@ -1,6 +1,5 @@
 import type { Dictionary } from "@/content/copy";
 import { RollButton } from "@/components/ui/RollButton";
-import { HeroShell, HeroSwitch } from "@/components/HeroShell";
 import { ArrowDown } from "@/components/Icons";
 import styles from "./Hero.module.css";
 
@@ -9,7 +8,7 @@ const BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAI
 
 export function Hero({ dict }: { dict: Dictionary }) {
   return (
-    <HeroShell className={styles.hero} labelledBy="hero-title">
+    <section className={styles.hero} aria-labelledby="hero-title">
       <div className={styles.frame}>
         {/* 0. réteg: a régi oldal szintvonalai. Két egymásra tett kép: a fehér alap és az animált zöld
             festés (a fejlesztői leírás a scripts/build-vonal.py-ban). Csökkentett mozgásnál az alap helyére
@@ -22,21 +21,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
           <picture>
             <source media="(prefers-reduced-motion: reduce)" srcSet={BLANK} />
             <img
-              className={styles.paint}
               src="/img/vonal-anim.svg"
-              alt=""
-              width={1024}
-              height={1983}
-              loading="eager"
-              decoding="async"
-            />
-          </picture>
-          {/* Visszakapcsoláskor villan fel: minden vonal zölden (csökkentett mozgásnál nincs). */}
-          <picture>
-            <source media="(prefers-reduced-motion: reduce)" srcSet={BLANK} />
-            <img
-              className={styles.flash}
-              src="/img/vonal-flash.svg"
               alt=""
               width={1024}
               height={1983}
@@ -54,36 +39,21 @@ export function Hero({ dict }: { dict: Dictionary }) {
             <p className={`${styles.eyebrow} ${styles.in}`} style={{ "--d": "250ms" } as React.CSSProperties}>
               {dict.hero.eyebrow}
             </p>
-            {/* A h1 nevét a sr-only szöveg adja, mert a sorban egy kezelhető kapcsoló is van. */}
-            <h1 id="hero-title" className={styles.title} aria-labelledby="hero-title-text">
-              <span id="hero-title-text" className="sr-only">
-                BRANDS ON.
-              </span>
-              <span className={styles.line} aria-hidden="true">
+            <h1 id="hero-title" className={styles.title}>
+              <span className={styles.line}>
                 <span style={{ "--d": "300ms" } as React.CSSProperties}>Brands</span>
               </span>
               <span className={styles.line}>
-                <span style={{ "--d": "420ms" } as React.CSSProperties}>
-                  <HeroSwitch label={dict.hero.switchLabel} />
-                  <span className={styles.words} aria-hidden="true">
-                    <span className={styles.wordOn}>N.</span>
-                    <span className={styles.wordOff}>FF.</span>
-                  </span>
-                </span>
+                <span style={{ "--d": "420ms" } as React.CSSProperties}>On.</span>
               </span>
             </h1>
           </div>
 
           <div className={styles.side}>
-            <div className={`${styles.leads} ${styles.in}`} style={{ "--d": "750ms" } as React.CSSProperties}>
-              <p className={`${styles.lead} ${styles.leadOn}`}>
-                {dict.hero.lead}
-                {dict.hero.leadRest ? <span> {dict.hero.leadRest}</span> : null}
-              </p>
-              <p className={`${styles.lead} ${styles.leadOff}`}>
-                {dict.hero.offLead} <span>{dict.hero.offHint}</span>
-              </p>
-            </div>
+            <p className={`${styles.lead} ${styles.in}`} style={{ "--d": "750ms" } as React.CSSProperties}>
+              {dict.hero.lead}
+              {dict.hero.leadRest ? <span> {dict.hero.leadRest}</span> : null}
+            </p>
             <div className={`${styles.actions} ${styles.in}`} style={{ "--d": "900ms" } as React.CSSProperties}>
               <RollButton href="#arajanlat" size="lg" chip={false}>
                 {dict.hero.cta}
@@ -96,6 +66,6 @@ export function Hero({ dict }: { dict: Dictionary }) {
           </div>
         </div>
       </div>
-    </HeroShell>
+    </section>
   );
 }

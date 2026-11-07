@@ -61,28 +61,6 @@
   }
 }
 
-/* A zöld festés és a visszakapcsoláskori felvillanás a két képen van, ezek külön kezelhetők. */
-.paint {
-  transition: opacity 500ms ease;
-}
-
-.flash {
-  opacity: 0;
-  pointer-events: none;
-}
-
-@keyframes flash {
-  0% {
-    opacity: 0;
-  }
-  16% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes drift {
   from {
     transform: translate3d(-0.8%, 0.6%, 0) scale(1);
@@ -141,103 +119,6 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
   text-shadow: 0 16px 38px rgb(0 0 0 / 0.32);
-}
-
-/* ---------- BRANDS ON. ↔ BRANDS OFF. ---------- */
-/* A cím vége („N." / „FF.") és a lead szövege két egymásra tett változat, a section[data-power] váltja. */
-.words {
-  display: inline-grid;
-}
-
-.wordOn,
-.wordOff {
-  grid-area: 1 / 1;
-  transition:
-    transform 450ms var(--ease-out),
-    opacity 300ms ease;
-}
-
-.wordOff {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-.leads {
-  display: grid;
-}
-
-.leads > .lead {
-  grid-area: 1 / 1;
-  transition:
-    opacity 400ms ease,
-    transform 450ms var(--ease-out),
-    visibility 0s linear 0s;
-}
-
-.leadOff {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition-delay: 0s, 0s, 400ms;
-}
-
-/* KI állás: teljesen fekete, a menüsor (SiteHeader) és a sütisáv is eltűnik, csak a cím és a lead marad. */
-.hero {
-  transition: background-color 500ms ease;
-}
-
-.hero[data-power="off"] {
-  background: #000;
-}
-
-.hero[data-power="off"] .frame {
-  background: #000;
-}
-
-.hero[data-power="off"] .lines {
-  opacity: 0;
-}
-
-.hero[data-power="off"] .scrim,
-.hero[data-power="off"] .eyebrow,
-.hero[data-power="off"] .actions {
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 400ms ease,
-    visibility 0s linear 400ms;
-}
-
-.hero[data-power="off"] .paint {
-  opacity: 0;
-}
-
-.hero[data-power="off"] .wordOn {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.hero[data-power="off"] .wordOff {
-  transform: none;
-  opacity: 1;
-}
-
-.hero[data-power="off"] .leadOn {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition-delay: 0s, 0s, 400ms;
-}
-
-.hero[data-power="off"] .leadOff {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition-delay: 0s;
-}
-
-.hero[data-flash] .flash {
-  animation: flash 1100ms ease-out both;
 }
 
 /* Maszkolt sor-felemelkedés */
@@ -375,13 +256,5 @@
 
   .lines {
     animation: none;
-  }
-
-  .wordOn,
-  .wordOff,
-  .leads > .lead,
-  .lines,
-  .paint {
-    transition-duration: 1ms;
   }
 }

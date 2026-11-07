@@ -23,13 +23,6 @@
     visibility 0s linear 200ms;
 }
 
-/* A hero „BRANDS OFF." állásában a sütisáv is eltűnik (ld. HeroShell). */
-:global(html[data-hero-off]) .banner {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 .banner[data-visible] {
   opacity: 1;
   transform: none;

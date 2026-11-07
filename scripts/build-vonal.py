@@ -10,7 +10,7 @@ Bemenet:  scripts/vonal.svg – az eredeti Illustrator-export. A vonalak itt kit
 Kimenet:  vonal-base.svg    – fehér alap (az eredeti szalagok), statikus
           vonal-anim.svg    – csak a zöld festés (animált), az alap fölé kerül
           vonal-static.svg  – az eredeti kép (fehér + öt zöld vonal), csökkentett mozgásnál ez látszik
-          vonal-flash.svg   – minden vonal zölden: a hero kapcsolójának visszakapcsolásakor villan fel
+          vonal-flash.svg   – minden vonal zölden (a hero kapcsolójának kivétele óta nem használja az oldal)
 
 A zöld „váltófutásban" halad: mindig fut valamelyik vonalon, és ahogy az egyik halványodik,
 a következő – térben szomszédos – vonalon fokozatosan megjelenik. Két váltó fut egymástól

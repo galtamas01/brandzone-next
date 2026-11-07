@@ -3,7 +3,7 @@
 ## 0. Brief
 Többoldalas, háromnyelvű (RO alapértelmezett, HU, EN) bemutatkozó oldal a **BrandZone** székelyudvarhelyi videós tartalomgyártó ügynökségnek. A látogató: romániai (erdélyi) cégvezető vagy marketinges, aki short-form videót (TikTok, Reels), reklámfilmet vagy UGC-t keres.
 Hangulat: **magabiztos, filmszerű, letisztult**.
-Aláírás (amire emlékezni fognak): **a kapcsoló.** A logó „ZONE" szavában az O egy félig kitöltött kapcsoló. A hero „BRANDS ON." címében az „ON" O-betűje egy valódi kapcsoló, amely betöltéskor zöldre, BE állásba kattan. A köszönőoldalon és a 404-en ugyanez a kapcsoló visszatér.
+Aláírás (amire emlékezni fognak): **a kapcsoló.** A logó „ZONE" szavában az O egy félig kitöltött kapcsoló. A hero „BRANDS ON." címe egyszerű felirat (a kapcsoló és a „BRANDS OFF." állapot kikerült a heróból). A köszönőoldalon és a 404-en a kapcsoló viszont megmarad, betöltéskor zöldre, BE állásba kattan.
 Hűség: a régi oldal minden tartalmi blokkja megmarad (menü, hero, együttműködések, csapat, referenciák + számlálók, szolgáltatások, GYIK, ajánlatkérő űrlap, lábléc, süti-sáv), új sorrendben és új formában. Új szekció nincs.
 
 ## 1. Stack
@@ -61,8 +61,8 @@ Tartalom alulra igazítva, 12 hasábos rács, `padding: 0 clamp(20px,4vw,56px) c
 | Elem | Szöveg | Stílus | Mozgás |
 |---|---|---|---|
 | Szemöldök | ● Created by BRANDZONE | Poppins 500 13px, uppercase +.2em, zöld pont 8px | .25s, fade + y 12px |
-| H1 | BRANDS / ON. (az O = kapcsoló) | Archivo Black, `clamp(4.25rem,14.2vw,14.5rem)`, lh .84, tracking −.035em, uppercase; 1–8. hasáb | maszkolt sorfelemelkedés `0.3 + i×0.12s`, 1.1s expo |
-| Kapcsoló | — | pirula `1.32em × .74em`, keret `.09em` fehér; gomb `.5em` kör | 1.15s-nál BE: gomb `translateX`, háttér zöld, 520ms `cubic-bezier(.34,1.56,.64,1)`; kattintható játék, `role="switch"` |
+| H1 | BRANDS / ON. | Archivo Black, `clamp(4.25rem,14.2vw,14.5rem)`, lh .84, tracking −.035em, uppercase; 1–8. hasáb | maszkolt sorfelemelkedés `0.3 + i×0.12s`, 1.1s expo |
+| Kapcsoló (csak a köszönőoldalon és a 404-en) | — | pirula `1.32em × .74em`, keret `.09em` fehér; gomb `.5em` kör | 1.15s-nál BE: gomb `translateX`, háttér zöld, 520ms `cubic-bezier(.34,1.56,.64,1)`; kattintható játék, `role="switch"` |
 | Al-szöveg | a régi #content-2 mondat | Poppins 400 `clamp(16px,1.35vw,19px)`/1.5, fg-80, max 30rem; 9–12. hasáb, alulra | .75s |
 | CTA | Cere ofertă → | elsődleges gomb | .9s |
 | Másodlagos | Vezi referințele ↓ | szöveglink 14px fg-80 | .95s |
@@ -82,7 +82,7 @@ Mobil: egy hasáb, H1 `clamp(4.25rem,22vw,7rem)`, az al-szöveg és a gombok a c
 Háttérrétegek, poszterfal, szemcse, marquee-n kívüli logók; nincs pulzálás, nincs lebegő folt, nincs videó-transition. `prefers-reduced-motion`: minden végállapotban, a marquee kézzel görgethető, a hero-videó nem indul el.
 
 ## 11. Elfogadás (első képernyő)
-Teljes magas, lekerekített keretű hero, a mozgó háttérvideó (vagy szürke poszterfal) felett lent balra hatalmas fehér „BRANDS / ON." felirat, amelyben az O kapcsoló zöldre vált; jobbra lent rövid mondat és fehér „Cere ofertă" gomb zöld nyílchippel; fent lebegő üvegmenü logóval és nyelvváltóval. Mobilon (390px) semmi nem lóg ki, a cím két sorban marad.
+Teljes magas, lekerekített keretű hero, a mozgó háttérvideó (vagy szürke poszterfal) felett lent balra hatalmas fehér „BRANDS / ON." felirat; jobbra lent rövid mondat és fehér „Cere ofertă" gomb zöld nyílchippel; fent lebegő üvegmenü logóval és nyelvváltóval. Mobilon (390px) semmi nem lóg ki, a cím két sorban marad.
 
 ## 12. Blog (/blog/, /blog-ro/)
 Ugyanaz a menü, lábléc és sütisáv, mint a főoldalon; a menüben új „Blog" link (HU, RO), a nyelvváltó a másik nyelv blogcímlapjára visz.

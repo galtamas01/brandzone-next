@@ -53,9 +53,6 @@ export type Dictionary = {
     leadRest?: string;
     cta: string;
     secondary: string; // új
-    switchLabel: string; // új
-    offLead: string; // a kapcsoló KI állásában megjelenő szöveg
-    offHint: string;
   };
   clients: { label: string; title: string; showAll: string; showLess: string };
   references: {
@@ -170,9 +167,6 @@ const ro: Dictionary = {
     leadRest: "– prin conținut video.",
     cta: "Cere ofertă",
     secondary: "Vezi referințele",
-    switchLabel: "Comutator BRANDS ON",
-    offLead: "Așa arată un brand fără conținut.",
-    offHint: "Pornește comutatorul la loc.",
   },
   clients: {
     label: "Parteneri",
@@ -324,9 +318,6 @@ const hu: Dictionary = {
     leadRest: "– videós tartalmakkal.",
     cta: "Árajánlatot kérek",
     secondary: "Referenciák",
-    switchLabel: "BRANDS ON kapcsoló",
-    offLead: "Így néz ki egy brand tartalom nélkül.",
-    offHint: "Kapcsold vissza a kapcsolót.",
   },
   clients: {
     label: "Partnerek",
@@ -478,9 +469,6 @@ const en: Dictionary = {
     leadRest: "through video content.",
     cta: "Get a quote",
     secondary: "See our work",
-    switchLabel: "BRANDS ON switch",
-    offLead: "This is what a brand looks like without content.",
-    offHint: "Flip the switch back on.",
   },
   clients: {
     label: "Partners",
