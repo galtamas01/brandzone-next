@@ -77,7 +77,7 @@ docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozg
 - **Hero-videó:** a repóban van, `public/video/hero-1080.mp4` (nagy kijelzőre, ~9 MB) és `hero-720.mp4`
   (900 px alatti kijelzőre, ~4,5 MB), hang nélkül. A `components/HeroVideo.tsx` tölti be, némítva és ismétlődve,
   enyhe sötétítéssel. A hero feketéből indul: a videó csak akkor úszik be, ha ténylegesen lejátszódik; ha nem (hiba, tiltott
-  automatikus indítás pl. energiatakarékos módban, csökkentett mozgás, adatspórolás, vagy 1,5 mp-ig nem indul el),
+  automatikus indítás pl. energiatakarékos módban, csökkentett mozgás, adatspórolás, vagy 6 mp-ig nem indul el; az egyértelmű eseteknél nincs várakozás, a vonalak azonnal beúsznak),
   a szintvonalas háttér a tartalék, az is a feketéből úszik be. JS nélkül a vonalak azonnal látszanak. Csere esetén (a forrás 4K) így készült a két fájl, a fájlnevek maradhatnak:
   ```
   ffmpeg -i forras.mp4 -an -vf "scale=1920:1080:flags=lanczos" -c:v libx264 -profile:v high -preset slow \

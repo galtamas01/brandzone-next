@@ -24,8 +24,13 @@ type Connection = { saveData?: boolean; effectiveType?: string };
 
 type Bg = "init" | "video" | "lines";
 
-/** Ennyi ideig várunk a videó indulására; utána a vonalak úsznak be a feketéből (ha később mégis elindul, a videó beúszik fölé). */
-const VIDEO_WAIT_MS = 1500;
+/**
+ * Ennyi ideig várunk a videó indulására, ha nincs egyértelmű hiba (lassú hálózat). Az egyértelmű esetekben (hiba,
+ * tiltott automatikus indítás, csökkentett mozgás, adatspórolás) nem várunk: a vonalak azonnal beúsznak. A vonalak
+ * tehát csak akkor jelennek meg, ha a videó tényleg nem tud elindulni; ha később mégis elindul, beúszik fölé.
+ */
+const VIDEO_WAIT_MS = 6000;
+
 export function HeroVideo({ src, srcSmall }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [bg, setBg] = useState<Bg>("init");
