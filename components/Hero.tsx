@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/content/copy";
 import { RollButton } from "@/components/ui/RollButton";
+import { HeroVideo } from "@/components/HeroVideo";
 import { ArrowDown } from "@/components/Icons";
 import styles from "./Hero.module.css";
 
@@ -30,6 +31,9 @@ export function Hero({ dict }: { dict: Dictionary }) {
             />
           </picture>
         </div>
+
+        {/* Háttérvideó: csak akkor látszik, ha le is játszódik; különben a fenti vonalak a tartalék. */}
+        <HeroVideo src="/video/hero-1080.mp4" srcSmall="/video/hero-720.mp4" />
 
         {/* 1. réteg: olvashatóság */}
         <div className={styles.scrim} aria-hidden="true" />

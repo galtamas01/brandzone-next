@@ -74,10 +74,19 @@ docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozg
 - **Referenciavideók:** továbbra is a régi repó GitHub Pages-éről töltenek
   (`https://brandzone759.github.io/Brandzone-v2teszt/videos/<id>.mp4`), kattintásra.
   A posztereket ez a repó tartalmazza, így az oldal betöltésekor egyetlen videó sem töltődik.
-- **Hero-videó:** `https://brandzone-pullzone.b-cdn.net/hero_video.mp4` (a mostani hosting).
-  Ha nem érhető el, a hero a referencia-poszterekből álló szürke falat mutatja, nem marad üres.
-- Build közben mindkettő felülírható környezeti változóval:
-  `NEXT_PUBLIC_MEDIA_BASE=…/ NEXT_PUBLIC_HERO_VIDEO=… npm run build`.
+- **Hero-videó:** a repóban van, `public/video/hero-1080.mp4` (nagy kijelzőre, ~9 MB) és `hero-720.mp4`
+  (900 px alatti kijelzőre, ~4,5 MB), hang nélkül. A `components/HeroVideo.tsx` tölti be, némítva és ismétlődve,
+  enyhe sötétítéssel. A hero feketéből indul: a videó csak akkor úszik be, ha ténylegesen lejátszódik; ha nem (hiba, tiltott
+  automatikus indítás pl. energiatakarékos módban, csökkentett mozgás, adatspórolás, vagy 1,5 mp-ig nem indul el),
+  a szintvonalas háttér a tartalék, az is a feketéből úszik be. JS nélkül a vonalak azonnal látszanak. Csere esetén (a forrás 4K) így készült a két fájl, a fájlnevek maradhatnak:
+  ```
+  ffmpeg -i forras.mp4 -an -vf "scale=1920:1080:flags=lanczos" -c:v libx264 -profile:v high -preset slow \
+         -crf 30 -maxrate 3M -bufsize 6M -pix_fmt yuv420p -movflags +faststart public/video/hero-1080.mp4
+  ffmpeg -i forras.mp4 -an -vf "scale=1280:720:flags=lanczos" -c:v libx264 -profile:v main -preset slow \
+         -crf 31 -maxrate 1.5M -bufsize 3M -pix_fmt yuv420p -movflags +faststart public/video/hero-720.mp4
+  ```
+  A fájlnév nem tartalmaz hash-t, ezért a Netlify egy hétig gyorsítótárazza (`netlify.toml`).
+- **Build közben** a referenciavideók helye felülírható: `NEXT_PUBLIC_MEDIA_BASE=…/ npm run build`.
 
 ## Controller-kompatibilitás
 

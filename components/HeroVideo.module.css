@@ -1,0 +1,37 @@
+/* A videó a szintvonalak (z -3) fölött, a scrim (z -1) alatt van; amíg nem játszik, teljesen átlátszó. */
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  /* Nem 0: a Safari az átlátszó (opacity: 0) videót rejtettnek veszi, és nem indítja el automatikusan. */
+  opacity: 0.001;
+  pointer-events: none;
+  background: var(--bg);
+  transition: opacity 900ms ease;
+}
+
+.root[data-hero-bg="video"] {
+  opacity: 1;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Enyhe sötétítés, hogy a fehér cím és a szöveg a világos jeleneteken se vesszen el. A cím alatti scrim ehhez jön még. */
+.root::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(10 10 10 / 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    transition-duration: 1ms;
+  }
+}

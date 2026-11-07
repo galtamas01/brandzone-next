@@ -22,7 +22,7 @@
   inset: -3%;
   z-index: -3;
   opacity: 0.7;
-  transition: opacity 600ms ease;
+  transition: opacity 1200ms ease;
   animation: drift 36s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -59,6 +59,24 @@
     max-width: none;
     transform: translate(-50%, -42%);
   }
+}
+
+/*
+ * A hero feketéből indul (ld. HeroVideo, data-hero-bg): JS alatt a vonalak addig rejtve vannak, amíg ki nem derül,
+ * hogy a videó elindul-e. Ha igen ("video"), a videó úszik be, és a vonalak leállnak; ha nem ("lines"), a vonalak
+ * úsznak be a feketéből. JS nélkül a vonalak azonnal látszanak.
+ */
+:global(html.js) .frame:has([data-hero-bg="init"]) .lines {
+  opacity: 0;
+}
+
+.frame:has([data-hero-bg="video"]) .lines {
+  opacity: 0;
+  visibility: hidden;
+  animation-play-state: paused;
+  transition:
+    opacity 900ms ease,
+    visibility 0s linear 900ms;
 }
 
 @keyframes drift {

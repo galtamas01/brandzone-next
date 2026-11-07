@@ -40,7 +40,7 @@ A zöld csak három elemtípuson: a kapcsoló BE állapota, a CTA-k nyíl-chipje
 ## 5. Média
 | Hely | Forrás | Viselkedés |
 |---|---|---|
-| hero háttér | `https://brandzone-pullzone.b-cdn.net/hero_video.mp4` (a mostani hosting) | `muted autoplay loop playsinline`, `loadeddata`-ra 1.8s alatt beúszik (opacity 0→1, scale 1.05→1); képernyőn kívül szünetel; hiba esetén rejtve marad |
+| hero háttér | `/video/hero-1080.mp4` (nagy kijelző) / `hero-720.mp4` (<900px), hang nélkül | `muted loop playsinline`; a hero feketéből indul; a videó a `playing` esemény után úszik be (900ms), 45%-os sötétítéssel a scrim alatt; képernyőn kívül szünetel; ha 1,5s-ig nem indul el (vagy tiltott/hibás), a szintvonalas háttér úszik be a feketéből |
 | hero alap | a referencia-poszterek döntött falként (6 oszlop desktop, 3 mobil), `grayscale(1) brightness(.42)` | azonnal látszik, ez a fallback és a videó alatti réteg is |
 | referenciák | `MEDIA_BASE/<id>.mp4` (a régi repó GitHub Pages-e), poszter: `/video-posters/<id>.jpg` | kattintásra tölt be (`preload="none"`), egyszerre csak egy szól |
 | szolgáltatások | `banner_phone`, `macbook1`, `ugc-2` (átlátszó PNG, átméretezve) | statikus |

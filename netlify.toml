@@ -12,6 +12,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# A háttérvideók neve nem tartalmaz hash-t, ezért egy hétig gyorsítótárazhatók (csere után legfeljebb ennyit késik).
+[[headers]]
+  for = "/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 [[headers]]
   for = "/*"
   [headers.values]

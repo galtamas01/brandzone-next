@@ -13,10 +13,6 @@ export const SITE_URL = "https://brandzone.ro";
 export const MEDIA_BASE =
   process.env.NEXT_PUBLIC_MEDIA_BASE ?? "https://brandzone759.github.io/Brandzone-v2teszt/videos/";
 
-/** A hero háttérvideója. Ha nem tölt be, a poszterfal marad látható. */
-export const HERO_VIDEO =
-  process.env.NEXT_PUBLIC_HERO_VIDEO ?? "https://brandzone-pullzone.b-cdn.net/hero_video.mp4";
-
 /** A referenciák poszterképei a repóban vannak: /public/video-posters/<id>.jpg */
 export const posterUrl = (id: string) => `/video-posters/${encodeURIComponent(id)}.jpg`;
 export const videoUrl = (id: string) => `${MEDIA_BASE}${encodeURIComponent(id)}.mp4`;
