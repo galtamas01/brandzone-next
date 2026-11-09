@@ -1,20 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import type { Counter } from "@/content/data";
 import styles from "./Stats.module.css";
 
 const format = (n: number) => Math.round(n).toLocaleString("fr-FR").replace(/ | /g, " ");
 const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
-type Props = { counters: Counter[]; labels: Record<Counter["id"], string> };
+type Props = {
+  counters: Counter[];
+  labels: Record<Counter["id"], string>;
+  /** Opcionális extra cella a számlálók mellett (pl. díj-logó). */
+  children?: ReactNode;
+};
 
 /**
  * Számlálók: a végérték már a HTML-ben szerepel (SEO, JS nélkül is helyes),
  * és csak láthatóvá váláskor számol fel 0-ról, egyszer, 1.8 mp alatt.
  * A szám szélessége nem ugrál, mert tabular-nums és a végértékkel azonos a helyfoglalás.
  */
-export function Stats({ counters, labels }: Props) {
+export function Stats({ counters, labels, children }: Props) {
   const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -59,6 +64,11 @@ export function Stats({ counters, labels }: Props) {
           <p className={styles.label}>{labels[c.id]}</p>
         </li>
       ))}
+      {children && (
+        <li className={`${styles.stat} ${styles.extra}`} data-reveal style={{ "--i": counters.length } as React.CSSProperties}>
+          {children}
+        </li>
+      )}
     </ul>
   );
 }

@@ -1,0 +1,64 @@
+/* A szöveg végén lévő videók. A cikk többi része a blog Article.module.css-ét használja. */
+.videos {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding-top: clamp(32px, 5vw, 56px);
+  border-top: 1px solid var(--line);
+}
+
+.videosLabel {
+  margin-bottom: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-60);
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 28px;
+}
+
+.video {
+  width: min(100%, 320px);
+}
+
+.player {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  object-fit: cover;
+}
+
+.caption {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fg-60);
+  text-align: center;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--fg-40);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .videoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 24px;
+  }
+
+  .video {
+    width: 100%;
+  }
+}

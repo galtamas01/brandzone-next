@@ -209,6 +209,47 @@ select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
+/* ---------- Szekciócímek zöld, kézzel húzott hullámos aláhúzása ----------
+   A `.wave-ul` a cím szövegét körbevevő inline elem. Az abszolút pozíciójú ::after többsoros inline elemnél az első
+   sor bal széléhez és az utolsó sor jobb széléhez igazodik, ezért az aláhúzás az utolsó sor alá kerül. A bal oldali
+   behúzás (8%) és a jobb oldali túllógás (3%) a mintaként kapott rajz arányát követi. Az alakot (két vonás)
+   a /img/hullam-alahuzas.svg tartalmazza, a méretet a `height` (em) szabályozza. */
+.wave-ul {
+  position: relative;
+  /* Saját stacking context: a z-index:-1 aláhúzás így a szöveg mögé kerül (de nem csúszik a szekció háttere mögé),
+     és nem takarja ki a hosszú ékezetes betűk (pl. román ș, ț, ă) alsó részét. */
+  z-index: 0;
+}
+
+.wave-ul::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: -3%;
+  bottom: -0.24em;
+  height: 0.4em;
+  z-index: -1;
+  background: url("/img/hullam-alahuzas.svg") no-repeat center / 100% 100%;
+  pointer-events: none;
+}
+
+/* JS alatt balról jobbra "behúzódik", amikor a cím megjelenik. JS nélkül azonnal látszik. */
+.js [data-reveal] .wave-ul::after {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 900ms var(--ease-out) 350ms;
+}
+
+.js [data-reveal].is-in .wave-ul::after {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] .wave-ul::after {
+    clip-path: none;
+    transition: none;
+  }
+}
+
 /* ---------- Görgetésre megjelenő elemek ----------
    Csak akkor rejtünk, ha a JS fut (html.js). JS nélkül minden látszik. */
 .js [data-reveal] {

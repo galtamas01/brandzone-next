@@ -4,6 +4,8 @@ import { alternatesFor, ROUTES, type Locale } from "@/lib/i18n";
 import { GOOGLE_SITE_VERIFICATION, SITE_URL } from "@/lib/site";
 import { BLOG_COPY } from "@/content/blog-copy";
 import { indexPath, postPath, type BlogLang, type Post } from "@/lib/blog";
+import { CASE_STUDY_COPY } from "@/content/case-study/copy";
+import type { CaseStudy } from "@/lib/case-study";
 
 const OG_LOCALE: Record<Locale, string> = { ro: "ro_RO", hu: "hu_HU", en: "en_US" };
 
@@ -49,6 +51,25 @@ export function policyMetadata(locale: Locale): Metadata {
     ...base,
     title: d.policy.metaTitle,
     alternates: { canonical: ROUTES[locale].policy, languages: alternatesFor("policy") },
+  };
+}
+
+export function caseStudyMetadata(study: CaseStudy): Metadata {
+  const { lang } = study;
+  return {
+    ...base,
+    title: `${study.title} | ${CASE_STUDY_COPY[lang].titleSuffix}`,
+    description: study.description,
+    alternates: { canonical: ROUTES[lang].caseStudy, languages: alternatesFor("caseStudy") },
+    openGraph: {
+      type: "article",
+      url: ROUTES[lang].caseStudy,
+      title: study.title,
+      description: study.description,
+      locale: OG_LOCALE[lang],
+      images: [{ url: "/brandzone-logo.jpg" }],
+      publishedTime: study.datePublished,
+    },
   };
 }
 

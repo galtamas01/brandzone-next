@@ -252,8 +252,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  /* Az aláhúzás (::after) a currentColor-t használja, ezért a szöveggel együtt zöld. */
   .link:hover {
-    color: var(--fg);
+    color: var(--green-hover);
   }
 
   .link:hover::after {

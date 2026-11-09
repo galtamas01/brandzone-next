@@ -47,8 +47,11 @@ export function Hero({ dict }: { dict: Dictionary }) {
               <span className={styles.line}>
                 <span style={{ "--d": "300ms" } as React.CSSProperties}>Brands</span>
               </span>
-              <span className={styles.line}>
-                <span style={{ "--d": "420ms" } as React.CSSProperties}>On.</span>
+              <span className={styles.lineWrap}>
+                <span className={styles.line}>
+                  <span style={{ "--d": "420ms" } as React.CSSProperties}>On.</span>
+                </span>
+                <span className={styles.wave} aria-hidden="true" />
               </span>
             </h1>
           </div>
@@ -59,7 +62,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
               {dict.hero.leadRest ? <span> {dict.hero.leadRest}</span> : null}
             </p>
             <div className={`${styles.actions} ${styles.in}`} style={{ "--d": "900ms" } as React.CSSProperties}>
-              <RollButton href="#arajanlat" size="lg" chip={false}>
+              <RollButton href="#arajanlat" size="lg" chip={false} variant="green">
                 {dict.hero.cta}
               </RollButton>
               <a href="#referenciak" className={styles.secondary}>

@@ -68,7 +68,7 @@ const slugify = (s: string) =>
 const stripTags = (html: string) => html.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 
 /** Minden <h2>-nek id-t ad (ékezetek nélküli, egyedi), és kigyűjti a tartalomjegyzéket. */
-function addHeadingIds(html: string): { html: string; toc: TocEntry[] } {
+export function addHeadingIds(html: string): { html: string; toc: TocEntry[] } {
   const toc: TocEntry[] = [];
   const used = new Set<string>();
   const out = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner: string) => {

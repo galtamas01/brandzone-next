@@ -147,6 +147,41 @@
   margin: -0.06em -0.1em -0.08em;
 }
 
+/* Az utolsó sor köré: a hullámos aláhúzás a maszkon (overflow) kívül van, ezért nem vágódik le. A wrapper pont
+   a szöveg szélességű, így az aláhúzás a „On." alá igazodik (arányok: ld. a .wave-ul a globals.css-ben). */
+.lineWrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+}
+
+.wave {
+  position: absolute;
+  left: 8%;
+  right: -3%;
+  bottom: calc(-0.25em - 3px); /* 3 px-szel lejjebb, hogy ne érjen a betűkhöz */
+  height: 0.34em;
+  background: url("/img/hullam-alahuzas.svg") no-repeat center / 100% 100%;
+  pointer-events: none;
+  animation: waveIn 900ms var(--ease-out) 1100ms both;
+}
+
+/* Desktopon még 2 px-szel lejjebb fér (összesen 5 px az eredetihez képest). */
+@media (min-width: 900px) {
+  .wave {
+    bottom: calc(-0.25em - 5px);
+  }
+}
+
+@keyframes waveIn {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 .line > span {
   display: block;
   white-space: nowrap;
@@ -268,6 +303,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .line > span,
+  .wave,
   .in {
     animation: none;
   }

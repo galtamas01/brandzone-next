@@ -151,3 +151,9 @@ export const SocialIcon = ({
     <path fill="currentColor" fillRule="evenodd" d={SOCIAL_PATHS[network]} />
   </svg>
 );
+
+export const ChevronDown = ({ size, ...p }: Props) => (
+  <svg {...base(size)} {...p}>
+    <path d="M5 9l7 7 7-7" />
+  </svg>
+);

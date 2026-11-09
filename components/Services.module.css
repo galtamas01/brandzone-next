@@ -28,6 +28,8 @@
   /* minmax(0, 1fr): a hosszú szavak ne tolják szélesebbre az oszlopot a kártyánál (mobilon kilógott a szöveg) */
   grid-template-columns: minmax(0, 1fr);
   gap: 28px;
+  /* Egyforma magasság: a ServicesStackFit a legmagasabb kártya magasságát adja (--card-eq). */
+  min-height: var(--card-eq, 0px);
   overflow: hidden;
   padding: clamp(24px, 4vw, 56px);
   border-radius: var(--radius-card);
@@ -133,6 +135,54 @@
   width: min(88%, 460px);
 }
 
+/* Fotó: kitölti az egész dobozt (nincs belső margó, nincs árnyék); a kép abszolút, így a doboz magassága a képarányból
+   (mobil) vagy a kártyából (desktop) jön, és az object-fit: cover vágja a felesleget. */
+.visual[data-photo] {
+  position: relative;
+  padding: 0;
+  aspect-ratio: 1286 / 1200;
+}
+
+.visual[data-photo] img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  filter: none;
+}
+
+/* Animált panel (AI-kártya): a panel saját háttere és kerete van, ezért a doboz csak befogja. Mobilon a panel
+   a tartalma szerinti magasságú (a ServicesStackFit az egyforma kártyamagasságot úgyis kiegyenlíti). */
+.visual[data-panel] {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  background: none;
+}
+
+/*
+ * Telefon / tablet: a kártyák egymásra csúsznak, mint desktopon. A kártya magasabb a képernyőnél, ezért a `top` a
+ * kisebbik érték: ha belefér, a tetejével tapad (kis lépcsővel, hogy látszódjon a pakli), ha nem, az aljával
+ * (100svh - a kártya magassága), így a teljes tartalma végiggörgethető, mielőtt a következő ráérne.
+ * A `--card-h`-t a ServicesStackFit írja; JS nélkül nincs tapadás, a kártyák simán egymás alatt vannak.
+ */
+@media (max-width: 899px) {
+  :global(html.js) .slot {
+    position: sticky;
+    top: min(
+      calc(var(--nav-h) + 12px + var(--i) * 8px),
+      calc(100svh - var(--card-h, 0px) - 12px)
+    );
+  }
+
+  .card {
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: 0 -18px 40px rgb(0 0 0 / 0.18);
+  }
+}
+
 @media (min-width: 900px) {
   .stack {
     gap: 24px;
@@ -147,12 +197,31 @@
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     align-items: center;
     gap: 48px;
-    min-height: min(640px, calc(100svh - var(--nav-h) - 140px));
+    min-height: max(var(--card-eq, 0px), min(640px, calc(100svh - var(--nav-h) - 140px)));
     box-shadow: 0 -18px 40px rgb(0 0 0 / 0.18);
   }
 
   .visual {
     height: 100%;
     min-height: 360px;
+  }
+
+  .visual[data-photo],
+  .visual[data-panel] {
+    aspect-ratio: auto;
+    align-self: stretch;
+  }
+
+  .visual[data-panel] {
+    min-height: 360px;
+  }
+
+  /* Kép nélküli kártya (amíg nincs hozzá kép): egy oszlop, a szöveg ne fusson szét a teljes szélességen. */
+  .card[data-no-image] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card[data-no-image] .text {
+    max-width: 52rem;
   }
 }

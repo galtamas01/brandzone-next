@@ -29,5 +29,26 @@
   <url><loc>https://brandzone.ro/policy/politica-de-confidentialitate</loc></url>
   <url><loc>https://brandzone.ro/policy/adatvedelmi-tajekoztato</loc></url>
   <url><loc>https://brandzone.ro/policy/privacy-policy</loc></url>
+  <url>
+    <loc>https://brandzone.ro/studiu-de-caz/perfekt</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/esettanulmany/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/case-study/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+  </url>
+  <url>
+    <loc>https://brandzone.ro/esettanulmany/perfekt</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/esettanulmany/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/case-study/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+  </url>
+  <url>
+    <loc>https://brandzone.ro/case-study/perfekt</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://brandzone.ro/esettanulmany/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://brandzone.ro/case-study/perfekt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://brandzone.ro/studiu-de-caz/perfekt"/>
+  </url>
   <!-- BLOG-URLS -->
 </urlset>

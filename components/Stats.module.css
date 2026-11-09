@@ -10,6 +10,12 @@
   border-bottom: 1px solid var(--line);
 }
 
+/* Extra cella (díj-logó): a logó függőlegesen a cella közepén áll. */
+.extra {
+  display: flex;
+  align-items: center;
+}
+
 .value {
   position: relative;
   display: inline-flex;
@@ -49,7 +55,10 @@
 
 @media (min-width: 900px) {
   .stats {
-    grid-template-columns: 1.1fr 1.6fr 1.2fr;
+    /* Egyforma oszlopok, a cellák számától függetlenül (jelenleg: videószámláló + díj-logó) */
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
     border-bottom: 1px solid var(--line);
   }
 

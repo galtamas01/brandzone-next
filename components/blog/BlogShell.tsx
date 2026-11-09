@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { getDictionary } from "@/content/copy";
-import { ROUTES } from "@/lib/i18n";
-import { indexPath, type BlogLang } from "@/lib/blog-shared";
+import { ROUTES, type Locale } from "@/lib/i18n";
+import { indexPath } from "@/lib/blog-shared";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -12,15 +12,21 @@ import { Tracking } from "@/components/Tracking";
  * A blog oldalainak közös váza (menü, lábléc, süti-sáv, mérőkódok).
  * A nyelvváltó a blogban a másik nyelv blogcímlapjára, az EN pedig a főoldalra visz,
  * mert a magyar és a román cikkek önálló tartalmak, nem egymás fordításai.
+ * Más aloldal (pl. az esettanulmány) is használhatja: a `langHrefs` felülírja a nyelvváltó céljait,
+ * a `current={null}` pedig kikapcsolja a „Blog" menüpont kiemelését.
  */
 export function BlogShell({
   lang,
   children,
   jsonLd = [],
+  langHrefs = { hu: indexPath("hu"), ro: indexPath("ro") },
+  current = "blog",
 }: {
-  lang: BlogLang;
+  lang: Locale;
   children: ReactNode;
   jsonLd?: object[];
+  langHrefs?: Partial<Record<Locale, string>>;
+  current?: "blog" | null;
 }) {
   const dict = getDictionary(lang);
   return (
@@ -29,8 +35,8 @@ export function BlogShell({
         locale={lang}
         dict={dict}
         subpage
-        current="blog"
-        langHrefs={{ hu: indexPath("hu"), ro: indexPath("ro") }}
+        current={current ?? undefined}
+        langHrefs={langHrefs}
       />
       <main id="main">{children}</main>
       <SiteFooter locale={lang} dict={dict} />

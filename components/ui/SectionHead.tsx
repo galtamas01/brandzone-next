@@ -18,7 +18,7 @@ export function SectionHead({ label, title, id, tone = "dark", aside }: Props) {
           {label}
         </p>
         <h2 id={id} className={styles.title} data-reveal style={{ "--i": 1 } as React.CSSProperties}>
-          {title}
+          <span className="wave-ul">{title}</span>
         </h2>
       </div>
       {aside ? (

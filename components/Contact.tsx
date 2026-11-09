@@ -24,7 +24,7 @@ export function Contact({ locale, dict }: { locale: Locale; dict: Dictionary }) 
               {c.label}
             </p>
             <h2 id="contact-title" className={styles.title} data-reveal style={{ "--i": 1 } as React.CSSProperties}>
-              {c.title}
+              <span className="wave-ul">{c.title}</span>
             </h2>
             <p className={styles.lead} data-reveal style={{ "--i": 2 } as React.CSSProperties}>
               {c.lead}

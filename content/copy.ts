@@ -6,7 +6,7 @@
  * A partnerek, referenciavideók és a GYIK a content/data.json-ban vannak
  * (ugyanaz a szerkezet, mint a régi repóban, hogy a Controller később ide írhasson).
  */
-import type { Locale } from "@/lib/i18n";
+import { ROUTES, type Locale } from "@/lib/i18n";
 
 export type IconName =
   | "check"
@@ -21,13 +21,47 @@ export type IconName =
 
 export type TitlePart = { text: string; accent?: boolean };
 
+/** Egy Google-értékelés. Az avatar vagy kép (src), vagy színes kör a név kezdőbetűjével. */
+export type ReviewItem = {
+  name: string;
+  time: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  text: string;
+  /** Pl. „Románból fordítva" – a szöveg alatt, halványan. */
+  note?: string;
+  avatar: { src: string } | { color: string; letter: string };
+};
+
+export type ReviewsCopy = {
+  /** Nem látszik: a kártyasáv képernyőolvasós neve. */
+  title: string;
+  more: string;
+  less: string;
+  items: ReviewItem[];
+};
+
 export type Service = {
   id: string;
   title: TitlePart[];
   body: string;
   bullets: { icon: IconName; text: string }[];
-  /** bleed: a kép alja le van vágva (pl. telefon), ezért a doboz aljára igazítjuk */
-  image: { src: string; alt: string; width: number; height: number; bleed?: boolean };
+  /** Opcionális: kép nélkül a kártya csak szöveges. bleed: a kép alja le van vágva (pl. telefon), ezért a doboz aljára igazítjuk. photo: teljes méretű fotó, a doboz egészét kitölti */
+  /** Kép helyett animált panel (jelenleg csak az AI-kártya). */
+  panel?: "ai";
+  image?: { src: string; alt: string; width: number; height: number; bleed?: boolean; photo?: boolean };
+};
+
+/** Az AI-kártya animációjának (components/ai-panel) szövegei. */
+export type AiPanelCopy = {
+  prompt: string;
+  btn: { idle: string; scan: string; load: string; done: string };
+  chip: { orig: string; load: string; done: string };
+  tagCar: string;
+  tagOutfit: string;
+  status: string;
+  loading: string;
+  altBefore: string;
+  altVideo: string;
 };
 
 export type Social = { network: "tiktok" | "instagram" | "facebook" | "youtube"; href: string };
@@ -59,11 +93,14 @@ export type Dictionary = {
     label: string;
     title: string;
     counters: { videos: string; views: string; followers: string };
+    /** A számláló melletti díj-logó: a Perfekt esettanulmányra mutat (nyelvenként a saját változatára). */
+    award: { label: string; href: string };
     play: string; // új
     prev: string; // új
     next: string; // új
+    reviews: ReviewsCopy;
   };
-  services: { label: string; title: string; items: Service[] };
+  services: { label: string; title: string; items: Service[]; aiPanel: AiPanelCopy };
   team: {
     label: string;
     title: string;
@@ -136,9 +173,10 @@ const tel = (value: string, tag?: string): Contact => ({
 });
 
 const IMG = {
-  tiktok: { src: "/img/services/tiktok-reels.webp", width: 1000, height: 880, bleed: true },
-  commercial: { src: "/img/services/commercial.webp", width: 1000, height: 800 },
-  ugc: { src: "/img/services/ugc.webp", width: 1000, height: 800 },
+  reels: { src: "/img/services/reels.webp", width: 1286, height: 1200, photo: true },
+  commercial: { src: "/img/services/brandfilm-forgatas.webp", width: 1286, height: 1200, photo: true },
+  ads: { src: "/img/services/kampany-elemzes.webp", width: 1286, height: 1200, photo: true },
+  ugc: { src: "/img/services/ugc-forgatas.webp", width: 1286, height: 1200, photo: true },
 };
 
 const ro: Dictionary = {
@@ -178,9 +216,40 @@ const ro: Dictionary = {
     label: "Portofoliu",
     title: "Referințe",
     counters: { videos: "Videoclipuri", views: "Vizualizări", followers: "Urmăritori" },
+    award: { label: "Marketing Diamond Awards: studiu de caz Perfekt", href: ROUTES.ro.caseStudy },
     play: "Redă videoclipul",
     prev: "Înapoi",
     next: "Înainte",
+    reviews: {
+      title: "Recenzii",
+      more: "Citește mai mult",
+      less: "Mai puțin",
+      items: [
+        {
+          name: "Melinda Impex Instal SA",
+          time: "acum 5 luni",
+          rating: 5,
+          text: "BrandZone nu a fost doar un executant în proiectele noastre, ci un partener adevărat. Au înțeles repede ce ne dorim și ne-au ajutat cu idei proactive. Colaborarea a fost mereu fluidă, profesionistă și flexibilă. Recomandăm cu încredere echipa BrandZone oricărei afaceri care caută videoclipuri de calitate și un partener de încredere.",
+          note: "Tradus din maghiară",
+          avatar: { src: "/img/reviews/melinda-instal.webp" },
+        },
+        {
+          name: "Emese Cseke",
+          time: "acum 5 luni",
+          rating: 5,
+          text: "Recomand echipa BrandZone tuturor! Creativi, punctuali, flexibili!",
+          note: "Tradus din maghiară",
+          avatar: { color: "#5C6BC0", letter: "E" },
+        },
+        {
+          name: "Paul Sebastian Popa",
+          time: "acum 4 luni",
+          rating: 5,
+          text: "O echipă profesionistă, alături de care am filmat și filmez materiale video de promovare excelente!",
+          avatar: { color: "#00897B", letter: "P" },
+        },
+      ],
+    },
   },
   services: {
     label: "Ce facem",
@@ -188,38 +257,71 @@ const ro: Dictionary = {
     items: [
       {
         id: "tiktok-reels",
-        title: [{ text: "Creare conținut TikTok, " }, { text: "Reels", accent: true }],
-        body: "Pentru noi, conținutul short form nu înseamnă videoclipuri separate, ci un proces organic de construire a brandului pe termen lung. O comunicare care funcționează la nivelul brandurilor de top și la care oamenii se conectează.",
+        title: [{ text: "Prezență completă pe TikTok și " }, { text: "Reels", accent: true }],
+        body: "Nu facem doar videoclipuri: dacă vrei, ne ocupăm de întreaga prezență a brandului tău pe canalele de short form. Gândim strategia și formatele recurente, aducem noi actorul potrivit sau îți pregătim echipa să apară în fața camerei. Scriem, filmăm și montăm videoclipurile, le postăm, gestionăm comunitatea și în fiecare lună analizăm ce funcționează. Tu doar aprobi.",
         bullets: [
-          { icon: "check", text: "Conținut specific brandului" },
-          { icon: "compass", text: "Gândire strategică" },
-          { icon: "rocket", text: "Project management complet" },
+          { icon: "compass", text: "Strategie, format și actori" },
+          { icon: "clapper", text: "Producție de la scenariu la montaj" },
+          { icon: "rocket", text: "Postare, comunitate, raport lunar" },
         ],
-        image: { ...IMG.tiktok, alt: "Smartphone care afișează pagina TikTok a lanțului Perfekt" },
+        image: { ...IMG.reels, alt: "Spatele unei camere Sony, cu imaginea filmată pe ecran" },
+      },
+      {
+        id: "ai",
+        panel: "ai",
+        title: [{ text: "Videoclipuri cu " }, { text: "AI", accent: true }],
+        body: "Atât AI cât e nevoie. La noi, AI-ul nu ține locul filmărilor, ci vine în completarea lor: e o unealtă bună, pe care o folosim atunci când chiar aduce un plus videoclipului. De exemplu, pentru o scenă care nu se poate filma, un fundal sau pentru a arăta cum funcționează un produs pe dinăuntru. Iar dacă proiectul o cere, realizăm întregul videoclip cu AI, dar ideea și direcția creativă vin mereu de la noi.",
+        bullets: [
+          { icon: "clapper", text: "De la o singură scenă, chiar până la un videoclip întreg." },
+          { icon: "bolt", text: "Mai multe idei vizuale, mai puține limite." },
+          { icon: "check", text: "Soluții originale, nu șabloane generate." },
+        ],
       },
       {
         id: "commercial",
-        title: [{ text: "Producție video " }, { text: "publicitară", accent: true }],
-        body: "De la idee la filmare și până la montaj – ne ocupăm de tot: storyboard, locație și echipă, iluminare–sunet, motion graphics, subtitrări. De asemenea, oferim gestionarea completă a campaniilor de promovare, pentru ca materialul realizat să ajungă la publicul țintă.",
+        title: [{ text: "Spoturi publicitare", accent: true }, { text: " și filme de brand" }],
+        body: "Pentru atunci când un videoclip trebuie să reprezinte brandul pe termen lung. De la idee la filmare și montaj, ne ocupăm de tot: storyboard, locație și echipă, lumini, sunet, motion graphics, subtitrări. La cerere, din aceeași filmare scoatem și variantele short form, ca să ai material și pentru campanie.",
         bullets: [
-          { icon: "clapper", text: "Concepte creative puternice și execuție profesională." },
-          { icon: "chart", text: "Videoclipuri care atrag atenția și aduc rezultate." },
-          { icon: "devices", text: "Conținut optimizat pentru mai multe platforme." },
+          { icon: "check", text: "Concept puternic, execuție profesională" },
+          { icon: "clapper", text: "De la storyboard la montajul final" },
+          { icon: "devices", text: "Variante short form din aceeași filmare" },
         ],
-        image: { ...IMG.commercial, alt: "Ecran de laptop care arată procesul de editare" },
+        image: { ...IMG.commercial, alt: "Filmare într-un apartament: operator, prezentatoare și actor" },
+      },
+      {
+        id: "ads",
+        title: [{ text: "Videoclipuri publicitare", accent: true }, { text: " și gestionarea campaniilor" }],
+        body: "Cele mai multe reclame nu eșuează din cauza setărilor, ci din cauza videoclipului. De aceea facem videoclipuri care atrag atenția din prima secundă și le spun oamenilor clar de ce să cumpere de la tine. Apoi tot noi setăm și optimizăm reclamele, așa că nu mai ai nevoie de o echipă pentru videoclipuri și de alta pentru reclame.",
+        bullets: [
+          { icon: "clapper", text: "Scenarii scrise ca să vândă" },
+          { icon: "people", text: "Videoclip și campanie de la aceeași echipă" },
+          { icon: "chart", text: "Rezultate măsurabile, raport lunar" },
+        ],
+        image: { ...IMG.ads, alt: "Panou de analiză cu vizionările TikTok și Reels" },
       },
       {
         id: "ugc",
         title: [{ text: "Creare conținut " }, { text: "UGC", accent: true }],
-        body: "Lucrăm cu o bază vastă de creatori, astfel încât găsim mereu fața potrivită pentru brandul tău, indiferent de industrie sau public țintă. Oferim creatori cu care publicul tău se poate identifica cu adevărat.",
+        body: "Oameni reali, care vorbesc despre produsul tău așa cum l-ar recomanda un prieten. Din baza noastră de peste 100 de creatori găsim o față autentică pentru orice public țintă. Suntem prezenți și la filmare, așa că nu primești filmări brute, ci videoclipuri gata montate.",
         bullets: [
-          { icon: "people", text: "Oameni autentici, reali – conținut care inspiră încredere." },
-          { icon: "bolt", text: "Producție de conținut rapidă și flexibilă." },
-          { icon: "globe", text: "Videoclipuri multilingve: pentru public român, maghiar și englez." },
+          { icon: "people", text: "Peste 100 de creatori, pentru orice profil" },
+          { icon: "clapper", text: "Filmare și montaj, tot la noi" },
+          { icon: "globe", text: "În română, maghiară și engleză" },
         ],
-        image: { ...IMG.ugc, alt: "Cameră care surprinde o femeie zâmbitoare ținând un telefon" },
+        image: { ...IMG.ugc, alt: "Filmare UGC: o femeie prezintă un produs, filmată cu telefonul" },
       },
     ],
+    aiPanel: {
+      prompt: "Înlocuiește mașina cu un Porsche 911 argintiu, iar hanoracul cu un costum bleumarin.",
+      btn: { idle: "Generează", scan: "Analizăm", load: "Generăm", done: "Gata" },
+      chip: { orig: "Filmare originală", load: "Generare AI", done: "Videoclip AI" },
+      tagCar: "MAȘINĂ → PORSCHE 911",
+      tagOutfit: "ȚINUTĂ → COSTUM",
+      status: "Analizăm scena",
+      loading: "Generăm scena nouă",
+      altBefore: "Filmarea originală: tânăr în hanorac lângă o mașină",
+      altVideo: "Videoclip generat cu AI: aceeași scenă, cu costum și mașină sport",
+    },
   },
   team: {
     label: "Despre noi",
@@ -329,9 +431,39 @@ const hu: Dictionary = {
     label: "Munkáink",
     title: "Referen\u00adciák",
     counters: { videos: "Videó", views: "Nézettség", followers: "Követő" },
+    award: { label: "Marketing Diamond Awards: Perfekt esettanulmány", href: ROUTES.hu.caseStudy },
     play: "Videó lejátszása",
     prev: "Előző",
     next: "Következő",
+    reviews: {
+      title: "Értékelések",
+      more: "Olvass tovább",
+      less: "Kevesebb",
+      items: [
+        {
+          name: "Melinda Impex Instal SA",
+          time: "5 hónapja",
+          rating: 5,
+          text: "A BrandZone nem csupán kivitelezőként vett részt projektjeinkben, hanem valódi partnerként. Gyorsan megértették a céljainkat, és proaktív ötletekkel segítették a munkát. Az együttműködés mindig gördülékeny, professzionális és rugalmas volt. Bátran ajánljuk a BrandZone csapatát minden olyan vállalkozásnak, amely minőségi videós tartalmakat és megbízható partnert keres.",
+          avatar: { src: "/img/reviews/melinda-instal.webp" },
+        },
+        {
+          name: "Cseke Emese",
+          time: "5 hónapja",
+          rating: 5,
+          text: "Ajánlom mindenkinek a BrandZone csapatát! Kreatívak, pontosak, rugalmasak!",
+          avatar: { color: "#5C6BC0", letter: "E" },
+        },
+        {
+          name: "Paul Sebastian Popa",
+          time: "4 hónapja",
+          rating: 5,
+          text: "Profi csapat, akikkel kiváló promóciós videókat forgattam, és forgatok ma is!",
+          note: "Románból fordítva",
+          avatar: { color: "#00897B", letter: "P" },
+        },
+      ],
+    },
   },
   services: {
     label: "Amit csinálunk",
@@ -339,38 +471,71 @@ const hu: Dictionary = {
     items: [
       {
         id: "tiktok-reels",
-        title: [{ text: "TikTok, " }, { text: "Reels", accent: true }, { text: " tartalom\u00adgyártás" }],
-        body: "A short form tartalom nálunk nem különálló videókat jelent, hanem egy organikusan felépített, hosszú távú márkaépítést. Olyan kommunikációt, amely a vezető márkák szintjén működik, és amelyhez az emberek kapcsolódnak.",
+        title: [{ text: "Teljes körű TikTok és " }, { text: "Reels", accent: true }, { text: " jelenlét" }],
+        body: "Nem csak videókat gyártunk: ha szeretnéd, a márkád teljes short form jelenlétét is mi visszük. Kitaláljuk a stratégiát és a visszatérő formátumokat, és a szereplőt is mi hozzuk, vagy felkészítjük a saját csapatodat a kamera elé. Megírjuk, leforgatjuk és megvágjuk a videókat, kiposztoljuk őket, kezeljük a közösséget, és havonta megnézzük, mi működik. Neked annyi a dolgod, hogy jóváhagyd.",
         bullets: [
-          { icon: "check", text: "Márkaazonos tartalmak" },
-          { icon: "compass", text: "Stratégiai gondolkodás" },
-          { icon: "rocket", text: "Teljes körű projektmenedzsment" },
+          { icon: "compass", text: "Stratégia, formátum és szereplő" },
+          { icon: "clapper", text: "Gyártás a forgatókönyvtől a vágásig" },
+          { icon: "rocket", text: "Posztolás, közösség, havi riport" },
         ],
-        image: { ...IMG.tiktok, alt: "Okostelefon a Perfekt üzletlánc TikTok oldalával" },
+        image: { ...IMG.reels, alt: "Sony kamera hátulja, a kijelzőn a forgatott képpel" },
+      },
+      {
+        id: "ai",
+        panel: "ai",
+        title: [{ text: "AI", accent: true }, { text: "-támogatott videó" }],
+        body: "Annyi AI, amennyi kell. Nálunk az AI nem a forgatás helyett van, hanem mellette: egy jó eszköz, amit akkor veszünk elő, amikor tényleg hozzátesz a videóhoz. Például egy jelenetnél, amit nem lehet leforgatni, egy háttérnél vagy egy termék belső működésénél. Ha pedig a projekt azt kívánja, a teljes videót is AI-jal rakjuk össze, de az ötletet és a kreatív irányt mindig mi adjuk.",
+        bullets: [
+          { icon: "clapper", text: "Egy jelenettől akár a teljes videóig." },
+          { icon: "bolt", text: "Több vizuális ötlet, kevesebb korlát." },
+          { icon: "check", text: "Egyedi megoldások, nem generált sablonok." },
+        ],
       },
       {
         id: "commercial",
-        title: [{ text: "Reklám\u00advideó", accent: true }, { text: " készítés" }],
-        body: "Az ötlettől a forgatáson át a vágásig mindent megoldunk: storyboard, helyszín és stáb, világítás–hang, motion graphics, feliratok. A videókhoz teljes körű hirdetéskezelést is biztosítunk, hogy az elkészült tartalom a megfelelő célközönséghez jusson el.",
+        title: [{ text: "Reklám­film", accent: true }, { text: " és márkafilm" }],
+        body: "Amikor egy videónak hosszú távon kell képviselnie a márkát. Az ötlettől a forgatáson át a vágásig mindent megoldunk: storyboard, helyszín és stáb, világítás, hang, motion graphics, feliratok. Igény szerint ugyanabból a forgatásból a short form vágásokat is elkészítjük, így a kampányhoz is lesz anyag.",
         bullets: [
-          { icon: "clapper", text: "Erős kreatív koncepció és profi kivitelezés." },
-          { icon: "chart", text: "Videó, ami figyelmet kelt és eredményt hoz." },
-          { icon: "devices", text: "Több platformra optimalizált tartalom." },
+          { icon: "check", text: "Erős koncepció, profi kivitelezés" },
+          { icon: "clapper", text: "Storyboardtól a végső vágásig" },
+          { icon: "devices", text: "Short form verziók ugyanabból a forgatásból" },
         ],
-        image: { ...IMG.commercial, alt: "Laptop képernyő rajta a vágási munkafolyamatokkal" },
+        image: { ...IMG.commercial, alt: "Forgatás egy lakásban: operatőr, műsorvezető és szereplő" },
+      },
+      {
+        id: "ads",
+        title: [{ text: "Hirdetési videók", accent: true }, { text: " és kampány­kezelés" }],
+        body: "A legtöbb hirdetés nem a beállításokon bukik el, hanem a videón. Ezért olyan videókat készítünk, amik az első másodpercben megfognak, és azt is elmondják, miért tőled vegyenek. Utána a hirdetéseket is mi állítjuk be és optimalizáljuk, így nem kell külön videóst és külön hirdetéskezelőt keresned.",
+        bullets: [
+          { icon: "clapper", text: "Eladásra írt forgatókönyvek" },
+          { icon: "people", text: "Videó és kampány ugyanattól a csapattól" },
+          { icon: "chart", text: "Mérhető eredmények, havi riport" },
+        ],
+        image: { ...IMG.ads, alt: "Elemzői felület a TikTok és Reels megtekintések alakulásáról" },
       },
       {
         id: "ugc",
-        title: [{ text: "UGC", accent: true }, { text: " tartalom\u00adgyártás" }],
-        body: "Hatalmas szereplőbázissal dolgozunk, így bármely iparágra és célcsoportra megtaláljuk a márkához passzoló arcot, olyan szereplőt biztosítunk, akivel a közönséged azonosulni tud.",
+        title: [{ text: "UGC", accent: true }, { text: " tartalom­gyártás" }],
+        body: "Valós emberek, akik úgy beszélnek a termékedről, ahogy egy ismerős ajánlaná. A 100+ fős szereplőbázisunkból bármilyen célcsoporthoz megtaláljuk a hiteles arcot. A forgatáson is ott vagyunk, így nem nyers felvételt kapsz, hanem kész, vágott videót.",
         bullets: [
-          { icon: "people", text: "Hiteles, valós emberek – bizalomépítő tartalom." },
-          { icon: "bolt", text: "Gyors és rugalmas tartalomgyártás." },
-          { icon: "globe", text: "Többnyelvű videók: magyar, román és angol közönségnek." },
+          { icon: "people", text: "100+ szereplő bármilyen profilhoz" },
+          { icon: "clapper", text: "Forgatás és vágás is nálunk" },
+          { icon: "globe", text: "Magyar, román és angol nyelven" },
         ],
-        image: { ...IMG.ugc, alt: "Kamera benne egy mosolygó nővel, aki telefont tart a kezében" },
+        image: { ...IMG.ugc, alt: "UGC forgatás: egy nő terméket mutat, telefonnal rögzítve" },
       },
     ],
+    aiPanel: {
+      prompt: "Cseréld le a kocsit egy ezüst Porsche 911-re, a pulóvert pedig egy sötétkék öltönyre.",
+      btn: { idle: "Generálás", scan: "Elemzés", load: "Generálás", done: "Kész" },
+      chip: { orig: "Eredeti felvétel", load: "AI generálás", done: "AI videó" },
+      tagCar: "AUTÓ → PORSCHE 911",
+      tagOutfit: "RUHA → ÖLTÖNY",
+      status: "Jelenet elemzése",
+      loading: "Új jelenet generálása",
+      altBefore: "Az eredeti felvétel: fiatal férfi kapucnis pulóverben egy autó mellett",
+      altVideo: "AI-jal generált videó: ugyanaz a jelenet öltönnyel és sportautóval",
+    },
   },
   team: {
     label: "Rólunk",
@@ -480,9 +645,41 @@ const en: Dictionary = {
     label: "Work",
     title: "References",
     counters: { videos: "Videos", views: "Views", followers: "Followers" },
+    award: { label: "Marketing Diamond Awards: Perfekt case study", href: ROUTES.en.caseStudy },
     play: "Play video",
     prev: "Previous",
     next: "Next",
+    reviews: {
+      title: "Reviews",
+      more: "Read more",
+      less: "Show less",
+      items: [
+        {
+          name: "Melinda Impex Instal SA",
+          time: "5 months ago",
+          rating: 5,
+          text: "BrandZone wasn’t just a contractor on our projects, they were a true partner. They quickly understood our goals and supported the work with proactive ideas. Working together was always smooth, professional and flexible. We confidently recommend the BrandZone team to any business looking for quality video content and a reliable partner.",
+          note: "Translated from Hungarian",
+          avatar: { src: "/img/reviews/melinda-instal.webp" },
+        },
+        {
+          name: "Emese Cseke",
+          time: "5 months ago",
+          rating: 5,
+          text: "I recommend the BrandZone team to everyone! Creative, precise and flexible!",
+          note: "Translated from Hungarian",
+          avatar: { color: "#5C6BC0", letter: "E" },
+        },
+        {
+          name: "Paul Sebastian Popa",
+          time: "4 months ago",
+          rating: 5,
+          text: "A professional team I’ve shot excellent promotional videos with, and I still do!",
+          note: "Translated from Romanian",
+          avatar: { color: "#00897B", letter: "P" },
+        },
+      ],
+    },
   },
   services: {
     label: "What we do",
@@ -490,38 +687,71 @@ const en: Dictionary = {
     items: [
       {
         id: "tiktok-reels",
-        title: [{ text: "TikTok, " }, { text: "Reels", accent: true }, { text: " content creation" }],
-        body: "For us, short-form content is not about standalone videos, but about building a brand organically over the long term. A type of communication that works at the level of leading brands and that people genuinely connect with.",
+        title: [{ text: "Complete TikTok and " }, { text: "Reels", accent: true }, { text: " presence" }],
+        body: "We don't just make videos: if you want, we run your brand's entire short-form presence. We build the strategy and the recurring formats, and we bring the right talent or get your own team ready for the camera. We write, shoot and edit the videos, post them, manage the community, and check what's working every month. All you have to do is approve.",
         bullets: [
-          { icon: "check", text: "Brand-aligned content" },
-          { icon: "compass", text: "Strategic thinking" },
-          { icon: "rocket", text: "End-to-end project management" },
+          { icon: "compass", text: "Strategy, format and talent" },
+          { icon: "clapper", text: "Production from script to final cut" },
+          { icon: "rocket", text: "Posting, community, monthly report" },
         ],
-        image: { ...IMG.tiktok, alt: "Smartphone showing the Perfekt retail chain TikTok page" },
+        image: { ...IMG.reels, alt: "Back of a Sony camera showing the shot on its screen" },
+      },
+      {
+        id: "ai",
+        panel: "ai",
+        title: [{ text: "AI", accent: true }, { text: "-assisted video" }],
+        body: "As much AI as it takes. For us, AI doesn't replace filming, it works alongside it: a great tool we reach for when it truly adds something to the video. Think of a scene that can't be filmed, a background, or how a product works on the inside. And if the project calls for it, we can create the entire video with AI, but the idea and the creative direction always come from us.",
+        bullets: [
+          { icon: "clapper", text: "From a single scene to a full video." },
+          { icon: "bolt", text: "More visual ideas, fewer limits." },
+          { icon: "check", text: "Custom solutions, not generated templates." },
+        ],
       },
       {
         id: "commercial",
-        title: [{ text: "Commercial", accent: true }, { text: " video production" }],
-        body: "From idea to shooting to editing – we take care of everything: storyboard, location and crew, lighting–sound, motion graphics, subtitles. We also provide full ad campaign management to ensure your content reaches the right audience.",
+        title: [{ text: "Commercials", accent: true }, { text: " and brand films" }],
+        body: "For when a video needs to represent your brand for the long run. From idea to shoot to edit, we handle everything: storyboard, location and crew, lighting, sound, motion graphics, subtitles. On request, we also cut short-form versions from the same shoot, so you have material for your campaign too.",
         bullets: [
-          { icon: "clapper", text: "Strong creative concepts and professional execution." },
-          { icon: "chart", text: "Videos that grab attention and deliver results." },
-          { icon: "devices", text: "Content optimized for multiple platforms." },
+          { icon: "check", text: "Strong concept, professional execution" },
+          { icon: "clapper", text: "From storyboard to final cut" },
+          { icon: "devices", text: "Short-form versions from the same shoot" },
         ],
-        image: { ...IMG.commercial, alt: "Laptop screen showing the editing process" },
+        image: { ...IMG.commercial, alt: "On set in an apartment: camera operator, presenter and actor" },
+      },
+      {
+        id: "ads",
+        title: [{ text: "Ad videos", accent: true }, { text: " and campaign management" }],
+        body: "Most ads don't fail because of the settings, they fail because of the video. That's why we make videos that grab attention in the first second and tell people exactly why they should buy from you. Then we set up and optimize the ads ourselves, so you don't need one team for video and another for ads.",
+        bullets: [
+          { icon: "clapper", text: "Scripts written to sell" },
+          { icon: "people", text: "Video and campaign from the same team" },
+          { icon: "chart", text: "Measurable results, monthly report" },
+        ],
+        image: { ...IMG.ads, alt: "Analytics dashboard showing TikTok and Reels views" },
       },
       {
         id: "ugc",
         title: [{ text: "UGC", accent: true }, { text: " content creation" }],
-        body: "We work with a vast talent pool, so we can always find the right face for your brand in any industry or target group. We provide creators your audience can genuinely relate to.",
+        body: "Real people talking about your product the way a friend would recommend it. From our pool of 100+ creators, we find an authentic face for any target audience. We're on set too, so you don't get raw footage, you get finished, edited videos.",
         bullets: [
-          { icon: "people", text: "Authentic, real people – trust-building content." },
-          { icon: "bolt", text: "Fast and flexible content production." },
-          { icon: "globe", text: "Multilingual videos: English, Hungarian and Romanian audiences." },
+          { icon: "people", text: "100+ creators for any profile" },
+          { icon: "clapper", text: "Filming and editing in-house" },
+          { icon: "globe", text: "In English, Hungarian and Romanian" },
         ],
-        image: { ...IMG.ugc, alt: "Camera showing a smiling woman holding a phone" },
+        image: { ...IMG.ugc, alt: "UGC shoot: a woman presenting a product, filmed on a phone" },
       },
     ],
+    aiPanel: {
+      prompt: "Swap the car for a silver Porsche 911 and the hoodie for a navy suit.",
+      btn: { idle: "Generate", scan: "Analyzing", load: "Generating", done: "Done" },
+      chip: { orig: "Original footage", load: "AI generating", done: "AI video" },
+      tagCar: "CAR → PORSCHE 911",
+      tagOutfit: "OUTFIT → SUIT",
+      status: "Analyzing scene",
+      loading: "Generating new scene",
+      altBefore: "Original footage: young man in a hoodie next to a car",
+      altVideo: "AI-generated video: the same scene with a suit and a sports car",
+    },
   },
   team: {
     label: "About us",

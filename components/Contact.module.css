@@ -35,7 +35,7 @@
 
 .lead {
   max-width: 26rem;
-  margin-top: 20px;
+  margin-top: 40px; /* a cím zöld aláhúzása lóg a cím alá */
   font-size: clamp(16px, 1.3vw, 18px);
   color: var(--fg-60);
 }

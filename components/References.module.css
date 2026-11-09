@@ -50,7 +50,7 @@
   width: 68px;
   height: 68px;
   margin: -34px 0 0 -34px;
-  padding-left: 3px;
+  /* A Play ikon háromszöge már optikailag középre van rajzolva (a súlypontja a viewBox közepén), ezért nincs eltolás. */
   border-radius: 999px;
   background: rgb(10 10 10 / 0.45);
   -webkit-backdrop-filter: blur(12px);
@@ -116,6 +116,49 @@
 
 @media (prefers-reduced-motion: reduce) {
   .poster .media {
+    transition: none;
+  }
+}
+
+/* Díj-logó a számláló mellett: fehér, kattintható (a Perfekt esettanulmányra visz); hoverre kicsit megnő (balról kiindulva, a cella széléhez igazodva). */
+.award {
+  display: block;
+  width: min(240px, 62vw);
+  color: var(--fg);
+  transform-origin: left center;
+  transition: transform 220ms var(--ease-out);
+}
+
+.award svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a.award:active {
+  transform: scale(0.98);
+}
+
+a.award:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 8px;
+  border-radius: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.award:hover {
+    transform: scale(1.06);
+  }
+}
+
+@media (min-width: 900px) {
+  .award {
+    width: clamp(190px, 15vw, 250px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .award {
     transition: none;
   }
 }
