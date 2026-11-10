@@ -48,7 +48,7 @@ export function ReelCard({ video, playLabel }: { video: ReferenceVideo; playLabe
       )}
 
       <div className={styles.chip}>
-        <img src={video.logo} alt="" width={28} height={28} loading="lazy" />
+        {video.logo && <img src={video.logo} alt="" width={28} height={28} loading="lazy" />}
         <span>{video.title}</span>
       </div>
     </article>

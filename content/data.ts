@@ -48,7 +48,7 @@ export function getPartners(locale: Locale): Partner[] {
 
 export function getVideos(locale: Locale): ReferenceVideo[] {
   return data.languages[locale].videos
-    .map((v) => ({ id: v.videoId || v.bunnyVideoId || "", title: v.title, logo: toPublicPath(v.logo) }))
+    .map((v) => ({ id: v.videoId || v.bunnyVideoId || "", title: v.title, logo: v.logo ? toPublicPath(v.logo) : "" }))
     .filter((v) => v.id); // üres hely a Control Panelben → kihagyjuk
 }
 

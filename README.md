@@ -71,9 +71,10 @@ docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozg
 
 ## Média
 
-- **Referenciavideók:** továbbra is a régi repó GitHub Pages-éről töltenek
-  (`https://brandzone759.github.io/Brandzone-v2teszt/videos/<id>.mp4`), kattintásra.
-  A posztereket ez a repó tartalmazza, így az oldal betöltésekor egyetlen videó sem töltődik.
+- **Referenciavideók:** a repóban vannak, `public/videos/<videoId>.mp4` (a Controller tölti fel, a fájlnév UUID, ezért a
+  Netlify örökre gyorsítótárazza: `netlify.toml`). Kattintásra töltenek be (`/videos/<id>.mp4`). A posztereket
+  (`public/video-posters/<id>.jpg`) ugyanígy a Controller írja, így az oldal betöltésekor egyetlen videó sem töltődik.
+  Hosztolás váltása: `lib/site.ts` → `MEDIA_BASE` (vagy build közben `NEXT_PUBLIC_MEDIA_BASE`).
 - **Hero-videó:** a repóban van, `public/video/hero-1080.mp4` (nagy kijelzőre, ~9 MB) és `hero-720.mp4`
   (900 px alatti kijelzőre, ~4,5 MB), hang nélkül. A `components/HeroVideo.tsx` tölti be, némítva és ismétlődve,
   enyhe sötétítéssel. A hero feketéből indul: a videó csak akkor úszik be, ha ténylegesen lejátszódik; ha nem (hiba, tiltott
@@ -92,8 +93,9 @@ docs/DESIGN-SPEC.md          a dizájn specifikációja (színek, méretek, mozg
 
 A `content/data.json` szerkezete **szándékosan azonos** a régi repó `data.json`-jával
 (`shared.counters`, `languages.<nyelv>.partners/videos/faq/counterTexts`). Amikor a Controller
-erre a repóra vált, a célútvonalat kell átírni benne `content/data.json`-ra és
-`public/partner-logos/`, `public/video-posters/`-re. Minden commit után a Netlify újrabuildel.
+erre a repóra vált, a környezeti változókat kell átírni (`GITHUB_OWNER`, `GITHUB_REPO`, új `GITHUB_TOKEN`); a Controller alapból már az
+itteni elrendezést használja: `content/data.json`, `public/partner-logos/`, `public/video-posters/`, `public/videos/`.
+Egy mentés = egy commit (adat + logók + videók) = egy Netlify-build.
 
 ## Blog
 

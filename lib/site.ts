@@ -6,12 +6,11 @@
 export const SITE_URL = "https://brandzone.ro";
 
 /**
- * A referenciavideók (mp4) helye, záró perjellel. A fájlnév a videó azonosítója
+ * A referenciavideók (mp4) helye, záró perjellel (alapból a repó public/videos/ mappája, a Controller ide tölt fel). A fájlnév a videó azonosítója
  * (content/data.json → videoId). Build közben felülírható:
  *   NEXT_PUBLIC_MEDIA_BASE=/local-videos/ npm run build
  */
-export const MEDIA_BASE =
-  process.env.NEXT_PUBLIC_MEDIA_BASE ?? "https://brandzone759.github.io/Brandzone-v2teszt/videos/";
+export const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_BASE ?? "/videos/";
 
 /** A referenciák poszterképei a repóban vannak: /public/video-posters/<id>.jpg */
 export const posterUrl = (id: string) => `/video-posters/${encodeURIComponent(id)}.jpg`;
