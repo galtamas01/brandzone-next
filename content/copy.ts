@@ -21,7 +21,7 @@ export type IconName =
 
 export type TitlePart = { text: string; accent?: boolean };
 
-/** Egy Google-értékelés. Az avatar vagy kép (src), vagy színes kör a név kezdőbetűjével. */
+/** Egy Google-értékelés (megjelenítési alak). Az avatar vagy kép (src), vagy színes kör a név kezdőbetűjével. A `time` buildkor készül a data.json `date` mezőjéből (content/data.ts). */
 export type ReviewItem = {
   name: string;
   time: string;
@@ -32,12 +32,12 @@ export type ReviewItem = {
   avatar: { src: string } | { color: string; letter: string };
 };
 
+/** Az értékelések feliratai; maguk az értékelések a content/data.json-ban vannak (Control Panel). */
 export type ReviewsCopy = {
   /** Nem látszik: a kártyasáv képernyőolvasós neve. */
   title: string;
   more: string;
   less: string;
-  items: ReviewItem[];
 };
 
 export type Service = {
@@ -224,31 +224,6 @@ const ro: Dictionary = {
       title: "Recenzii",
       more: "Citește mai mult",
       less: "Mai puțin",
-      items: [
-        {
-          name: "Melinda Impex Instal SA",
-          time: "acum 5 luni",
-          rating: 5,
-          text: "BrandZone nu a fost doar un executant în proiectele noastre, ci un partener adevărat. Au înțeles repede ce ne dorim și ne-au ajutat cu idei proactive. Colaborarea a fost mereu fluidă, profesionistă și flexibilă. Recomandăm cu încredere echipa BrandZone oricărei afaceri care caută videoclipuri de calitate și un partener de încredere.",
-          note: "Tradus din maghiară",
-          avatar: { src: "/img/reviews/melinda-instal.webp" },
-        },
-        {
-          name: "Emese Cseke",
-          time: "acum 5 luni",
-          rating: 5,
-          text: "Recomand echipa BrandZone tuturor! Creativi, punctuali, flexibili!",
-          note: "Tradus din maghiară",
-          avatar: { color: "#5C6BC0", letter: "E" },
-        },
-        {
-          name: "Paul Sebastian Popa",
-          time: "acum 4 luni",
-          rating: 5,
-          text: "O echipă profesionistă, alături de care am filmat și filmez materiale video de promovare excelente!",
-          avatar: { color: "#00897B", letter: "P" },
-        },
-      ],
     },
   },
   services: {
@@ -439,30 +414,6 @@ const hu: Dictionary = {
       title: "Értékelések",
       more: "Olvass tovább",
       less: "Kevesebb",
-      items: [
-        {
-          name: "Melinda Impex Instal SA",
-          time: "5 hónapja",
-          rating: 5,
-          text: "A BrandZone nem csupán kivitelezőként vett részt projektjeinkben, hanem valódi partnerként. Gyorsan megértették a céljainkat, és proaktív ötletekkel segítették a munkát. Az együttműködés mindig gördülékeny, professzionális és rugalmas volt. Bátran ajánljuk a BrandZone csapatát minden olyan vállalkozásnak, amely minőségi videós tartalmakat és megbízható partnert keres.",
-          avatar: { src: "/img/reviews/melinda-instal.webp" },
-        },
-        {
-          name: "Cseke Emese",
-          time: "5 hónapja",
-          rating: 5,
-          text: "Ajánlom mindenkinek a BrandZone csapatát! Kreatívak, pontosak, rugalmasak!",
-          avatar: { color: "#5C6BC0", letter: "E" },
-        },
-        {
-          name: "Paul Sebastian Popa",
-          time: "4 hónapja",
-          rating: 5,
-          text: "Profi csapat, akikkel kiváló promóciós videókat forgattam, és forgatok ma is!",
-          note: "Románból fordítva",
-          avatar: { color: "#00897B", letter: "P" },
-        },
-      ],
     },
   },
   services: {
@@ -653,32 +604,6 @@ const en: Dictionary = {
       title: "Reviews",
       more: "Read more",
       less: "Show less",
-      items: [
-        {
-          name: "Melinda Impex Instal SA",
-          time: "5 months ago",
-          rating: 5,
-          text: "BrandZone wasn’t just a contractor on our projects, they were a true partner. They quickly understood our goals and supported the work with proactive ideas. Working together was always smooth, professional and flexible. We confidently recommend the BrandZone team to any business looking for quality video content and a reliable partner.",
-          note: "Translated from Hungarian",
-          avatar: { src: "/img/reviews/melinda-instal.webp" },
-        },
-        {
-          name: "Emese Cseke",
-          time: "5 months ago",
-          rating: 5,
-          text: "I recommend the BrandZone team to everyone! Creative, precise and flexible!",
-          note: "Translated from Hungarian",
-          avatar: { color: "#5C6BC0", letter: "E" },
-        },
-        {
-          name: "Paul Sebastian Popa",
-          time: "4 months ago",
-          rating: 5,
-          text: "A professional team I’ve shot excellent promotional videos with, and I still do!",
-          note: "Translated from Romanian",
-          avatar: { color: "#00897B", letter: "P" },
-        },
-      ],
     },
   },
   services: {

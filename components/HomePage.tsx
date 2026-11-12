@@ -1,5 +1,5 @@
 import { getDictionary } from "@/content/copy";
-import { getCounters, getFaq, getPartners, getVideos } from "@/content/data";
+import { getCounters, getFaq, getPartners, getReviews, getVideos } from "@/content/data";
 import { ROUTES, type Locale } from "@/lib/i18n";
 import { organizationJsonLd } from "@/lib/metadata";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -25,7 +25,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <main id="main">
         <Hero dict={dict} />
         <Clients dict={dict} partners={getPartners(locale)} />
-        <References dict={dict} videos={getVideos(locale)} counters={getCounters()} />
+        <References dict={dict} videos={getVideos(locale)} counters={getCounters()} reviews={getReviews(locale)} />
         <Services dict={dict} />
         <Team dict={dict} />
         <Faq dict={dict} items={getFaq(locale)} />

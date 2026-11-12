@@ -177,6 +177,38 @@
           "question": "Csak short-form videókat készítetek, vagy mással is foglalkoztok?",
           "answer": "A fő fókuszunk a short-form videók (TikTok, Instagram Reels, YouTube Shorts), de ezen túl foglalkozunk brand-videókkal, reklám anyagokkal, mood-videókkal és kampány tartalmakkal is. A videókat mindig üzleti cél mentén tervezzük, nem önmagukért."
         }
+      ],
+      "reviews": [
+        {
+          "name": "Melinda Impex Instal SA",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "A BrandZone nem csupán kivitelezőként vett részt projektjeinkben, hanem valódi partnerként. Gyorsan megértették a céljainkat, és proaktív ötletekkel segítették a munkát. Az együttműködés mindig gördülékeny, professzionális és rugalmas volt. Bátran ajánljuk a BrandZone csapatát minden olyan vállalkozásnak, amely minőségi videós tartalmakat és megbízható partnert keres.",
+          "avatar": {
+            "src": "/img/reviews/melinda-instal.webp"
+          }
+        },
+        {
+          "name": "Cseke Emese",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "Ajánlom mindenkinek a BrandZone csapatát! Kreatívak, pontosak, rugalmasak!",
+          "avatar": {
+            "color": "#5C6BC0",
+            "letter": "E"
+          }
+        },
+        {
+          "name": "Paul Sebastian Popa",
+          "date": "2026-07",
+          "rating": 5,
+          "text": "Profi csapat, akikkel kiváló promóciós videókat forgattam, és forgatok ma is!",
+          "note": "Románból fordítva",
+          "avatar": {
+            "color": "#00897B",
+            "letter": "P"
+          }
+        }
       ]
     },
     "ro": {
@@ -334,6 +366,39 @@
           "question": "Realizați doar videoclipuri short-form sau și alte tipuri de conținut?",
           "answer": "Focusul nostru principal este pe videoclipurile short-form (TikTok, Instagram Reels, YouTube Shorts), însă realizăm și brand video-uri, materiale publicitare, mood video-uri și conținut pentru campanii. Toate materialele sunt concepute în jurul unor obiective de business clare, nu doar pentru vizibilitate."
         }
+      ],
+      "reviews": [
+        {
+          "name": "Melinda Impex Instal SA",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "BrandZone nu a fost doar un executant în proiectele noastre, ci un partener adevărat. Au înțeles repede ce ne dorim și ne-au ajutat cu idei proactive. Colaborarea a fost mereu fluidă, profesionistă și flexibilă. Recomandăm cu încredere echipa BrandZone oricărei afaceri care caută videoclipuri de calitate și un partener de încredere.",
+          "note": "Tradus din maghiară",
+          "avatar": {
+            "src": "/img/reviews/melinda-instal.webp"
+          }
+        },
+        {
+          "name": "Emese Cseke",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "Recomand echipa BrandZone tuturor! Creativi, punctuali, flexibili!",
+          "note": "Tradus din maghiară",
+          "avatar": {
+            "color": "#5C6BC0",
+            "letter": "E"
+          }
+        },
+        {
+          "name": "Paul Sebastian Popa",
+          "date": "2026-07",
+          "rating": 5,
+          "text": "O echipă profesionistă, alături de care am filmat și filmez materiale video de promovare excelente!",
+          "avatar": {
+            "color": "#00897B",
+            "letter": "P"
+          }
+        }
       ]
     },
     "en": {
@@ -490,6 +555,40 @@
         {
           "question": "Do you only create short-form videos, or do you do more than that?",
           "answer": "Our main focus is short-form video (TikTok, Instagram Reels, YouTube Shorts), but we also produce brand videos, advertising materials, mood videos, and campaign content. Every video is created with clear business objectives in mind—not just for visibility."
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Melinda Impex Instal SA",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "BrandZone wasn’t just a contractor on our projects, they were a true partner. They quickly understood our goals and supported the work with proactive ideas. Working together was always smooth, professional and flexible. We confidently recommend the BrandZone team to any business looking for quality video content and a reliable partner.",
+          "note": "Translated from Hungarian",
+          "avatar": {
+            "src": "/img/reviews/melinda-instal.webp"
+          }
+        },
+        {
+          "name": "Emese Cseke",
+          "date": "2026-06",
+          "rating": 5,
+          "text": "I recommend the BrandZone team to everyone! Creative, precise and flexible!",
+          "note": "Translated from Hungarian",
+          "avatar": {
+            "color": "#5C6BC0",
+            "letter": "E"
+          }
+        },
+        {
+          "name": "Paul Sebastian Popa",
+          "date": "2026-07",
+          "rating": 5,
+          "text": "A professional team I’ve shot excellent promotional videos with, and I still do!",
+          "note": "Translated from Romanian",
+          "avatar": {
+            "color": "#00897B",
+            "letter": "P"
+          }
         }
       ]
     }

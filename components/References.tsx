@@ -1,4 +1,4 @@
-import type { Dictionary } from "@/content/copy";
+import type { Dictionary, ReviewItem } from "@/content/copy";
 import type { Counter, ReferenceVideo } from "@/content/data";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Rail } from "@/components/ui/Rail";
@@ -8,9 +8,9 @@ import { ReelCard } from "@/components/ReelCard";
 import { ReviewCards } from "@/components/ReviewCards";
 import styles from "./References.module.css";
 
-type Props = { dict: Dictionary; videos: ReferenceVideo[]; counters: Counter[] };
+type Props = { dict: Dictionary; videos: ReferenceVideo[]; counters: Counter[]; reviews: ReviewItem[] };
 
-export function References({ dict, videos, counters }: Props) {
+export function References({ dict, videos, counters, reviews }: Props) {
   const { award } = dict.references;
   // A nézettség és a követők számlálója már nem látszik (az adat a data.json-ban marad), csak a videók száma.
   const shown = counters.filter((c) => c.id === "videos");
@@ -26,7 +26,7 @@ export function References({ dict, videos, counters }: Props) {
         </Stats>
       </div>
 
-      <ReviewCards copy={dict.references.reviews} />
+      <ReviewCards copy={dict.references.reviews} items={reviews} />
 
       <Rail
         label={dict.references.title.replace(/\u00ad/g, "")}
