@@ -2,37 +2,6 @@
   padding-block: var(--section-y) calc(var(--section-y) * 0.6);
 }
 
-.toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding: 0 8px 0 18px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--fg-80);
-  transition: transform 200ms var(--ease-out);
-}
-
-.toggle:active {
-  transform: scale(0.97);
-}
-
-.count {
-  display: grid;
-  place-items: center;
-  min-width: 30px;
-  height: 30px;
-  padding: 0 8px;
-  border-radius: 999px;
-  background: var(--bg-3);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  color: var(--fg);
-}
-
 /* ---------- Marquee ---------- */
 .marquees {
   display: flex;
@@ -100,31 +69,6 @@
   opacity: 1;
 }
 
-/* ---------- Rács ---------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
-  gap: 16px;
-}
-
-.grid li {
-  animation: pop 400ms var(--ease-out) both;
-  animation-delay: calc(var(--i) * 30ms);
-}
-
-.grid .logo {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-}
-
-@keyframes pop {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
 /* Érintőképernyős eszközön nincs hover, ezért a logók eleve teljes színben látszanak (egérrel továbbra is
    szürkék, és csak ráhúzásra színesednek). */
 @media (pointer: coarse) {
@@ -143,10 +87,6 @@
     filter: none;
     opacity: 1;
   }
-
-  .toggle:hover:not(:active) {
-    transform: scale(var(--hover-scale));
-  }
 }
 
 @media (min-width: 768px) {
@@ -164,11 +104,6 @@
   .group {
     padding-right: 20px;
   }
-
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
-    gap: 20px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -177,10 +112,6 @@
   }
 
   .track {
-    animation: none;
-  }
-
-  .grid li {
     animation: none;
   }
 }
