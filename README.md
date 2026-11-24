@@ -104,7 +104,8 @@ Mappánként két fájl kell:
 
 - `meta.json`: `title`, `description`, `ogDescription`, `eyebrow` (a téma, ez adja a szűrőgombokat),
   `datePublished` (ÉÉÉÉ-HH-NN), `readingTime`, `excerpt`, `highlights` (3 db `{value,label}`),
-  `faq` (`{q,a}` lista), `ctaTitle`, `ctaText`; opcionális: `order` (azonos napon belüli sorrend, kisebb = feljebb).
+  `faq` (`{q,a}` lista), `ctaTitle`, `ctaText`; opcionális: `order` (azonos napon belüli sorrend, kisebb = feljebb),
+  `draft` (`true` = piszkozat: a repóban marad, de a build kihagyja, így nem kerül ki az oldalra; a Control Panel ezzel tárolja a félkész cikkeket).
 - `cover.svg` (opcionális): a cikk egyedi borítógrafikája (400×225 vagy hasonló viewBox, `preserveAspectRatio="xMidYMid slice"`). Ha nincs, a slugból generált szintvonal-borító kerül a helyére. Hoverra a borító minden vonalán (`path`, `line`, `circle`, `rect` stb.) végigfut egy zöld vonal; ehhez a `cover.svg`-ben nem kell semmit csinálni, a `Cover.tsx` automatikusan zöld másolatot készít a vonalas alakzatokról.
 - `body.html`: csak a cikk törzse (`<p class="art-lead">`, `<h2>`, `<h3>`, `<ul>`, `<ol>`, `<div class="art-note">`).
   A cím, a kiemelések, a GYIK és a CTA a `meta.json`-ból épül.

@@ -17,6 +17,8 @@ export * from "@/lib/blog-shared";
  *   meta.json  cím, leírás, dátum, kiemelések, GYIK, CTA
  *   body.html  csak a cikk törzse (cím, GYIK, CTA nélkül)
  *   cover.svg  (opcionális) a cikk egyedi borítógrafikája; ha hiányzik, generált borító lesz
+ * A meta.json-ban a `"draft": true` mező piszkozattá teszi a cikket: a Control Panel így tárolja a félkész
+ * cikkeket. A piszkozat a repóban van, de az oldalra nem kerül ki (se oldal, se címlapkártya, se sitemap).
  * A mappa neve maga a slug, így a slug és az URL nem csúszhat el egymástól.
  * Új cikk = új mappa, a címlap, a sitemap és a kapcsolódó cikkek maguktól frissülnek.
  * Build közben minden hibát (hiányzó mező, törött belső link) egyszerre jelzünk.
@@ -92,6 +94,7 @@ function load(lang: BlogLang): Post[] {
   if (!fs.existsSync(dir)) return [];
   const errors: string[] = [];
   const posts: Post[] = [];
+  const draftSlugs = new Set<string>();
   const copy = BLOG_COPY[lang];
 
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -110,6 +113,11 @@ function load(lang: BlogLang): Post[] {
       meta = JSON.parse(fs.readFileSync(metaFile, "utf8"));
     } catch (e) {
       errors.push(`${where} a meta.json nem érvényes JSON: ${(e as Error).message}`);
+      continue;
+    }
+    // Piszkozat: a build nem ellenőrzi és nem teszi ki az oldalra (a kötelező mezők még hiányozhatnak)
+    if (meta.draft === true) {
+      draftSlugs.add(slug);
       continue;
     }
     if (meta.slug && meta.slug !== slug) errors.push(`${where} a meta.json "slug" mezője eltér a mappa nevétől, töröld a mezőt`);
@@ -143,7 +151,12 @@ function load(lang: BlogLang): Post[] {
   for (const p of posts) {
     const text = p.html + p.faq.map((f) => f.a).join(" ") + p.ctaText;
     for (const m of text.matchAll(linkRe)) {
-      if (!known.has(m[1])) errors.push(`[blog/${lang}/${p.slug}] törött belső link: ${BLOG_BASE[lang]}/${m[1]}`);
+      if (known.has(m[1])) continue;
+      errors.push(
+        draftSlugs.has(m[1])
+          ? `[blog/${lang}/${p.slug}] a link piszkozatra mutat (előbb tedd közzé): ${BLOG_BASE[lang]}/${m[1]}`
+          : `[blog/${lang}/${p.slug}] törött belső link: ${BLOG_BASE[lang]}/${m[1]}`,
+      );
     }
   }
 
